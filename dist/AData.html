@@ -1,0 +1,1567 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Training | Giraffe - Data Processing</title>
+
+    <!-- 引入 echarts.js -->
+    <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      content="Premium Multipurpose Admin & Dashboard Template"
+      name="description"
+    />
+    <meta content="Themesdesign" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico" />
+    <!-- plugin css -->
+    <link
+      href="assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <!-- Bootstrap Css -->
+    <link
+      href="assets/css/bootstrap.min.css"
+      id="bootstrap-style"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- Icons Css -->
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link
+      href="assets/css/app.min.css"
+      id="app-style"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <!-- DataTables -->
+    <link
+      href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="assets/libs/datatables.net-autoFill-bs4/css/autoFill.bootstrap4.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="assets/libs/datatables.net-keytable-bs4/css/keyTable.bootstrap4.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <!-- Responsive datatable examples -->
+    <link
+      href="assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <style>
+      .tab {
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .tab .tab-list {
+        flex: 6;
+        height: 100%;
+      }
+      .tab .tab-list ul {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+      .tab .tab-list ul li {
+        width: 120px;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 5px;
+        margin-right: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      .tab .tab-list ul li .icon {
+        width: 36px;
+        height: 36px;
+      }
+      .tab .tab-list ul li .name {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: c;
+        margin-top: 10px;
+      }
+      .tab .tab-list ul li .name .check {
+        margin-right: 10px;
+      }
+      .tab .tab-con {
+        flex: 4;
+        padding: 0 30px;
+      }
+      .tab .tab-con .desc {
+        padding: 20px;
+        width: 338px;
+        height: 284px;
+        line-height: 20px;
+        border-radius: 5px 5px 5px 5px;
+        background-color: #ffffff;
+        color: #101010;
+        font-size: 14px;
+        font-family: Roboto;
+        border: 1px solid #bbbbbb;
+        display: none;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .tab .tab-con .desc .bod {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .tab .tab-con .desc .bod .img {
+        width: 180px;
+        height: 120px;
+        border: 1px solid #bbbbbb;
+      }
+      .tab .tab-con .desc .bod .word {
+        width: 129px;
+        height: 126px;
+        color: #bbbbbb;
+        font-size: 8px;
+        text-align: left;
+        font-family: PingFangSC-regular;
+      }
+      
+      
+          </style>
+  </head>
+
+  <body>
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+      <header id="page-topbar">
+        <div class="navbar-header">
+            <div class="d-flex">
+
+                   <!-- LOGO -->
+             <div class="navbar-brand-box">
+                <a href="AuserAppli.html" class="logo logo-dark">
+                    <span class="logo-sm">
+                        <img src="assets/images/logo-sm.png" alt="" height="52">
+                    </span>
+                    <span class="logo-lg">
+                        <img src="assets/images/logo-dark.png" alt="" height="50">
+                    </span>
+                </a>
+
+                <a href="AuserAppli.html" class="logo logo-light">
+                    <span class="logo-sm">
+                        <img src="assets/images/logo-sm.png" alt="" height="52">
+                    </span>
+                    <span class="logo-lg">
+                        <img src="assets/images/logo-light.png" alt="" height="50">
+                    </span>
+                </a>
+            </div>
+
+                <button type="button" class="btn btn-sm px-3 font-size-24 header-item waves-effect" id="vertical-menu-btn">
+                    <i class="mdi mdi-menu"></i>
+                </button>
+
+
+                <div class="topbar-social-icon me-3 d-none d-md-block">
+                    <ul class="list-inline title-tooltip m-0">
+                        <li class="list-inline-item">
+                            <a href="email-inbox.html" data-bs-toggle="tooltip" data-placement="top" title="Email">
+                             <i class="mdi mdi-email-outline"></i>
+                            </a>
+                        </li>
+                
+                        <li class="list-inline-item">
+                            <a href="chat.html" data-bs-toggle="tooltip" data-placement="top" title="Chat">
+                             <i class="mdi mdi-tooltip-outline"></i>
+                            </a>
+                        </li>
+
+                        <li class="list-inline-item">
+                            <a href="calendar.html" data-bs-toggle="tooltip" data-placement="top" title="Calendar">
+                             <i class="mdi mdi-calendar"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+    
+            </div>
+
+             <!-- Search input -->
+             <div class="search-wrap" id="search-wrap">
+                <div class="search-bar">
+                    <input class="search-input form-control" placeholder="Search" />
+                    <a href="#" class="close-search toggle-search" data-target="#search-wrap">
+                        <i class="mdi mdi-close-circle"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="d-flex">
+                <div class="dropdown d-none d-lg-inline-block">
+                    <button type="button" class="btn header-item toggle-search noti-icon waves-effect" data-target="#search-wrap">
+                        <i class="mdi mdi-magnify"></i>
+                    </button>
+                </div>
+
+                <div class="dropdown d-none d-md-block ms-2">
+                    <button type="button" class="btn header-item waves-effect" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="me-2" src="assets/images/flags/us.jpg" alt="Header Language" height="16"> English <span class="mdi mdi-chevron-down"></span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end">
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <img src="assets/images/flags/germany.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle"> German </span>
+                        </a>
+                    </div>
+                </div>
+
+
+   
+
+   
+
+                <div class="dropdown d-none d-lg-inline-block ms-1">
+                    <button type="button" class="btn header-item noti-icon waves-effect" data-toggle="fullscreen">
+                        <i class="mdi mdi-fullscreen"></i>
+                    </button>
+                </div>
+
+        
+
+                <div class="dropdown d-inline-block">
+                    <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-7.jpg"
+                            alt="Header Avatar">
+                        <span class="d-none d-xl-inline-block ms-1">THU</span>
+                        <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end">
+                        <a class="dropdown-item text-danger" href="#"><i class="mdi mdi-power font-size-16 align-middle me-1 text-danger"></i> Logout</a>
+                    </div>
+                </div>
+
+                <div class="dropdown d-inline-block">
+                    <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
+                        <i class="mdi mdi-cog-outline font-size-20"></i>
+                    </button>
+                </div>
+    
+            </div>
+        </div>
+    </header>
+
+      <!-- ========== Left Sidebar Start ========== -->
+      <div class="vertical-menu">
+        <div data-simplebar class="h-100">
+          <div class="user-sidebar text-center">
+            <div class="dropdown">
+              <div class="user-img">
+                <img
+                  src="assets/images/users/avatar-7.jpg"
+                  alt=""
+                  class="rounded-circle"
+                />
+                <span class="avatar-online bg-success"></span>
+              </div>
+              <div class="user-info">
+                <h5 class="mt-3 font-size-16 text-white">THU Giraffe</h5>
+                <span class="font-size-13 text-white-50">Administrator</span>
+              </div>
+            </div>
+          </div>
+
+           <!--- Sidemenu -->
+           <div id="sidebar-menu">
+            <!-- Left Menu Start -->
+            <ul class="metismenu list-unstyled" id="side-menu">
+                <li class="menu-title">Operation</li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="dripicons-user"></i>
+                        <span>Application</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="AuserAppli.html">User Apply</a></li>
+                        <li><a href="AreviewAppli.html">Review</a></li>
+                        <li><a href="AResultPage.html">Result</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="dripicons-pulse"></i>
+                        <span>Training</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="AData.html">Data Processing</a></li>
+                        <li><a href="ATraining.html">Model Training</a></li>
+                        <li><a href="Ahistory.html">Model Training</a></li>
+                    </ul>
+                </li>
+                <li class="menu-title">Other</li>
+                <li>
+                    <a href="calendar.html" class=" waves-effect">
+                        <i class="dripicons-calendar"></i>
+                        <span>Calendar</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="chat.html" class=" waves-effect">
+                        <i class="dripicons-message"></i>
+                        <span>Chat</span>
+                    </a>
+                </li>
+
+               
+                <li>
+                  <a href="email-inbox.html" class=" waves-effect">
+                      <i class="dripicons-mail"></i>
+                      <span>Email</span>
+                  </a>
+              </li>
+
+                
+                
+            </ul>
+        </div>
+        <!-- Sidebar -->
+        </div>
+      </div>
+      <!-- Left Sidebar End -->
+
+      <!-- ============================================================== -->
+      <!-- Start right Content here -->
+      <!-- ============================================================== -->
+      <div class="main-content">
+        <div class="page-content">
+          <!-- start page title -->
+          <div class="page-title-box">
+            <div class="container-fluid">
+              <div class="row align-items-center">
+                <div class="col-sm-6">
+                  <div class="page-title">
+                    <h4>Data Processing</h4>
+                    <ol class="breadcrumb m-0">
+                      <li class="breadcrumb-item">
+                        <a href="javascript: void(0);">Giraffe</a>
+                      </li>
+                      <li class="breadcrumb-item">
+                        <a href="javascript: void(0);">Training</a>
+                      </li>
+                      <li class="breadcrumb-item active">
+                        Data Processing
+                      </li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end page title -->
+
+          <div class="container-fluid">
+            <div class="page-content-wrapper">
+              <div class="row">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="header-title">Data Processing</h4>
+                    <p class="card-title-desc">
+                      Data processing function, facilitate data group staff to
+                      quickly complete data processing
+                    </p>
+                    <div class="col-lg-4">
+                      <div class="mb-3">
+                        <label
+                          class="form-label"
+                          for="basicpill-firstname-input"
+                          >Project Name</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="basicpill-firstname-input"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="tab">
+                      <div class="tab-list">
+                          <ul>
+                              <li>
+                                  <img class='icon' src="assets/images/AdataImg/money.png">
+                                  <div class="name">
+                                      <input type="checkbox" class="check" name="" id="">
+                                      <div>Consumption</div>
+                                  </div>
+                              </li>
+                              <li>
+                                  <img class='icon' src="assets/images/AdataImg/resource.png">
+                                  <div class="name">
+                                      <input type="checkbox" class="check" name="" id="">
+                                      <div>Resource</div>
+                                  </div>
+                              </li>
+                              <li>
+                                  <img class='icon' src="assets/images/AdataImg/bank.png">
+                                  <div class="name">
+                                      <input type="checkbox" class="check" name="" id="">
+                                      <div>Bank</div>
+                                  </div>
+                              </li>
+                              <li>
+                                  <img class='icon' src="assets/images/AdataImg/trans.png">
+                                  <div class="name">
+                                      <input type="checkbox" class="check" name="" id="">
+                                      <div>Transport</div>
+                                  </div>
+                              </li>
+                              <li>
+                                <img class='icon' src="assets/images/AdataImg/house.png">
+                                <div class="name">
+                                    <input type="checkbox" class="check" name="" id="">
+                                    <div>Housing</div>
+                                </div>
+                              </li>
+                              <li>
+                                <img class='icon' src="assets/images/AdataImg/medi.png">
+                                <div class="name">
+                                    <input type="checkbox" class="check" name="" id="">
+                                    <div>Medication</div>
+                                </div>
+                              </li>
+                              <li>
+                                <img class='icon' src="assets/images/AdataImg/relation.png">
+                                <div class="name">
+                                    <input type="checkbox" class="check" name="" id="">
+                                    <div>Relationship</div>
+                                </div>
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+                    
+                    <h4 class="header-title">Data Preview</h4>
+                    <div class="row">
+                      <div class="col-md-2">
+                        <div
+                          class="nav flex-column nav-pills"
+                          id="v-pills-tab"
+                          role="tablist"
+                          aria-orientation="vertical"
+                        >
+                          <a
+                            class="nav-link mb-2 active"
+                            id="v-pills-home-tab"
+                            data-bs-toggle="pill"
+                            href="#v-pills-home"
+                            role="tab"
+                            aria-controls="v-pills-home"
+                            aria-selected="true"
+                            >Consumption</a
+                          >
+                          <a
+                            class="nav-link mb-2"
+                            id="v-pills-profile-tab"
+                            data-bs-toggle="pill"
+                            href="#v-pills-profile"
+                            role="tab"
+                            aria-controls="v-pills-profile"
+                            aria-selected="false"
+                            >Behaviour</a
+                          >
+                          <a
+                            class="nav-link mb-2"
+                            id="v-pills-messages-tab"
+                            data-bs-toggle="pill"
+                            href="#v-pills-messages"
+                            role="tab"
+                            aria-controls="v-pills-messages"
+                            aria-selected="false"
+                            >Housing</a
+                          >
+                          <a
+                            class="nav-link"
+                            id="v-pills-settings-tab"
+                            data-bs-toggle="pill"
+                            href="#v-pills-settings"
+                            role="tab"
+                            aria-controls="v-pills-settings"
+                            aria-selected="false"
+                            >Transport</a
+                          >
+                        </div>
+                      </div>
+                      <div class="col-md-10">
+                        <div
+                          class="tab-content text-muted mt-4 mt-md-0"
+                          id="v-pills-tabContent"
+                        >
+                          <div
+                            class="tab-pane fade show active"
+                            id="v-pills-home"
+                            role="tabpanel"
+                            aria-labelledby="v-pills-home-tab"
+                          >
+                          <table
+                          id="datatable"
+                          class="table table-bordered dt-responsive nowrap"
+                          style="
+                            border-collapse: collapse;
+                            border-spacing: 0;
+                            width: 100%;
+                            overflow: auto;
+                          "
+                        >
+                          <thead>
+                            <tr>
+                              <th>id</th>
+                              <th>age</th>
+                              <th>job</th>
+                              <th>marital</th>
+                              <th>educaiton</th>
+                              <th>default</th>
+                              <th>housing</th>
+                              <th>loan</th>
+                              <th>emp var rate</th>
+                              <th>nr employed</th>
+                            </tr>
+                          </thead>
+
+                          <tbody>
+                            <tr>
+                              <td>24</td>
+                              <td>67</td>
+                              <td>technician</td>
+                              <td>married</td>
+                              <td>basic.4y</td>
+                              <td>unknown</td>
+                              <td>no</td>
+                              <td>yes</td>
+                              <td>-3.4</td>
+                              <td>4962.3</td>
+                            </tr>
+                            <tr>
+                                <td>28</td>
+                                <td>38</td>
+                                <td>technician</td>
+                                <td>divorced</td>
+                                <td>university.degree</td>
+                                <td>no</td>
+                                <td>no</td>
+                                <td>no</td>
+                                <td>1.4</td>
+                                <td>5215.03</td>
+                            </tr>
+                            <tr>
+                                <td>31</td>
+                                <td>98</td>
+                                <td>blue-collar</td>
+                                <td>divorced</td>
+                                <td>basic.9y</td>
+                                <td>no</td>
+                                <td>yes</td>
+                                <td>yes</td>
+                                <td>1.4</td>
+                                <td>5276.92</td>
+                            </tr>
+                            <tr>
+                                <td>35</td>
+                                <td>66</td>
+                                <td>admin</td>
+                                <td>married</td>
+                                <td>university.degree</td>
+                                <td>no</td>
+                                <td>yes</td>
+                                <td>no</td>
+                                <td>-1.7</td>
+                                <td>5081.44</td>
+                            </tr>
+                            <tr>
+                                <td>39</td>
+                                <td>71</td>
+                                <td>retired</td>
+                                <td>married</td>
+                                <td>professional.degree</td>
+                                <td>no</td>
+                                <td>no</td>
+                                <td>yes</td>
+                                <td>-3.4</td>
+                                <td>4811.83</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                          </div>
+                          <div
+                            class="tab-pane fade"
+                            id="v-pills-profile"
+                            role="tabpanel"
+                            aria-labelledby="v-pills-profile-tab"
+                          >
+                            <table
+                              id="datatable"
+                              class="table table-bordered dt-responsive nowrap"
+                              style="
+                                border-collapse: collapse;
+                                border-spacing: 0;
+                                width: 100%;
+                                overflow: auto;
+                              "
+                            >
+                              <thead>
+                                <tr>
+                                  <th>id</th>
+                                  <th>age</th>
+                                  <th>job</th>
+                                  <th>marital</th>
+                                  <th>educaiton</th>
+                                  <th>default</th>
+                                  <th>housing</th>
+                                  <th>emp var rate</th>
+                                  <th>nr employed</th>
+                                </tr>
+                              </thead>
+
+                              <tbody>
+                                <tr>
+                                  <td>24</td>
+                                  <td>67</td>
+                                  <td>technician</td>
+                                  <td>married</td>
+                                  <td>basic.4y</td>
+                                  <td>unknown</td>
+                                  <td>no</td>
+                                  <td>yes</td>
+                                  <td>-3.4</td>
+                                  <td>4962.3</td>
+                                </tr>
+                                <tr>
+                                    <td>28</td>
+                                    <td>38</td>
+                                    <td>technician</td>
+                                    <td>divorced</td>
+                                    <td>university.degree</td>
+                                    <td>no</td>
+                                    <td>no</td>
+                                    <td>no</td>
+                                    <td>1.4</td>
+                                    <td>5215.03</td>
+                                </tr>
+                                <tr>
+                                    <td>31</td>
+                                    <td>98</td>
+                                    <td>blue-collar</td>
+                                    <td>divorced</td>
+                                    <td>basic.9y</td>
+                                    <td>no</td>
+                                    <td>yes</td>
+                                    <td>yes</td>
+                                    <td>1.4</td>
+                                    <td>5276.92</td>
+                                </tr>
+                                <tr>
+                                    <td>35</td>
+                                    <td>66</td>
+                                    <td>admin</td>
+                                    <td>married</td>
+                                    <td>university.degree</td>
+                                    <td>no</td>
+                                    <td>yes</td>
+                                    <td>no</td>
+                                    <td>-1.7</td>
+                                    <td>5081.44</td>
+                                </tr>
+                                <tr>
+                                    <td>39</td>
+                                    <td>71</td>
+                                    <td>retired</td>
+                                    <td>married</td>
+                                    <td>professional.degree</td>
+                                    <td>no</td>
+                                    <td>no</td>
+                                    <td>yes</td>
+                                    <td>-3.4</td>
+                                    <td>4811.83</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          <div
+                            class="tab-pane fade"
+                            id="v-pills-messages"
+                            role="tabpanel"
+                            aria-labelledby="v-pills-messages-tab"
+                          >
+                            <table
+                              id="datatable"
+                              class="table table-bordered dt-responsive nowrap"
+                              style="
+                                border-collapse: collapse;
+                                border-spacing: 0;
+                                width: 100%;
+                                overflow: auto;
+                              "
+                            >
+                              <thead>
+                                <tr>
+                                  <th>id</th>
+                                  <th>name</th>
+                                  <th>host id</th>
+                                  <th>room_type</th>
+                                  <th>price</th>
+                                  <th>number of reviews</th>
+                                  <th>calculated host listings count</th>
+                                </tr>
+                              </thead>
+
+                              <tbody>
+                                <tr>
+                                  <td>100213</td>
+                                  <td>The Great Wall Box Deluxe Suite A</td>
+                                  <td>527062</td>
+                                  <td>Private room</td>
+                                  <td>1201</td>
+                                  <td>2</td>
+                                  <td>4</td>
+                                </tr>
+                                <tr>
+                                  <td>287026</td>
+                                  <td>Studio in downtown Beijing #2</td>
+                                  <td>1456491</td>
+                                  <td>Entire home/apt</td>
+                                  <td>416</td>
+                                  <td>3</td>
+                                  <td>9</td>
+                                </tr>
+                                <tr>
+                                  <td>456641</td>
+                                  <td>High-floor downtown studio #3</td>
+                                  <td>1456491</td>
+                                  <td>Entire home/apt</td>
+                                  <td>436</td>
+                                  <td>8</td>
+                                  <td>9</td>
+                                </tr>
+                                <tr>
+                                  <td>537674</td>
+                                  <td>Quadrangle Courtyard ( Siheyuan)</td>
+                                  <td>2562442</td>
+                                  <td>8898</td>
+                                  <td>1</td>
+                                  <td>12</td>
+                                  <td>360</td>
+                                </tr>
+                                <tr>
+                                  <td>855090</td>
+                                  <td>Gladys Garden - casual living 3</td>
+                                  <td>4346816</td>
+                                  <td>242</td>
+                                  <td>2</td>
+                                  <td>10</td>
+                                  <td>316</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          <div
+                            class="tab-pane fade"
+                            id="v-pills-settings"
+                            role="tabpanel"
+                            aria-labelledby="v-pills-settings-tab"
+                          >
+                            <table
+                              id="datatable"
+                              class="table table-bordered dt-responsive nowrap"
+                              style="
+                                border-collapse: collapse;
+                                border-spacing: 0;
+                                width: 100%;
+                                overflow: auto;
+                              "
+                            >
+                              <thead>
+                                <tr>
+                                  <th>dispatching_base_number</th>
+                                  <th>date</th>
+                                  <th>active_vehicles</th>
+                                  <th>trips</th>
+                                </tr>
+                              </thead>
+
+                              <tbody>
+                                <tr>
+                                  <td>B02512</td>
+                                  <td>1/1/2015</td>
+                                  <td>190</td>
+                                  <td>1132</td>
+                                </tr>
+                                <tr>
+                                  <td>B02598</td>
+                                  <td>1/2/2015</td>
+                                  <td>870</td>
+                                  <td>6903</td>
+                                </tr>
+                                <tr>
+                                  <td>B02682</td>
+                                  <td>1/3/2015</td>
+                                  <td>915</td>
+                                  <td>8010</td>
+                                </tr>
+                                <tr>
+                                  <td>B02512</td>
+                                  <td>1/1/2015</td>
+                                  <td>190</td>
+                                  <td>1132</td>
+                                </tr>
+                                <tr>
+                                  <td>B02764</td>
+                                  <td>1/4/2015</td>
+                                  <td>183</td>
+                                  <td>993</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xl-4">
+                        <div>
+                          <div class="row">
+                            <div>
+                              <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                              <div id="donut" style="width: 400px;height:300px"></div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- end product img -->
+                      </div>
+                      <div class="col-xl-8">
+                        <div>
+                          <h5 class="mt-1 mb-3">Data Feature</h5>
+                          
+                          <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>v070</th>
+                                        <th>v607</th>
+                                        <th>v445</th>
+                                        <th>v091</th>
+                                        <th>v497</th>
+                                        <th>v302</th>
+                                        <th>v635</th>
+                                        <th>v935</th>
+                                        <th>v345</th>
+                                        <th>v446</th>
+                                        <th>v964</th>
+                                        <th>v111</th>
+                                        <th>v648</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">count</th>
+                                        <td>70326</td>
+                                        <td>50756</td>
+                                        <td>70326</td>
+                                        <td>49135</td>
+                                        <td>58600</td>
+                                        <td>70326</td>
+                                        <td>58600</td>
+                                        <td>13942</td>
+                                        <td>21009</td>
+                                        <td>55083</td>
+                                        <td>11676</td>
+                                        <td>70326</td>
+                                        <td>59577</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">mean</th>
+                                        <td>-0.4140620028581163</td>
+                                        <td>0.5593641170306307</td>
+                                        <td>-0.2661854141569264</td>
+                                        <td>0.10361195669075154</td>
+                                        <td>1.2617008282760664</td>
+                                        <td>0.2729698836703361</td>
+                                        <td>0.43053368508530915</td>
+                                        <td>2.619117947066392</td>
+                                        <td>0.03973676129277982</td>
+                                        <td>0.3239326540493278</td>
+                                        <td>0.12575824203494365</td>
+                                        <td>0.03395384854818986</td>
+                                        <td>3.566416948300342</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">std</th>
+                                        <td>0.5153835822173267</td>
+                                        <td>0.12406814937006846</td>
+                                        <td>0.21836150485317335</td>
+                                        <td>0.09121332811701616</td>
+                                        <td>0.6068051116206769</td>
+                                        <td>0.3163846719817327</td>
+                                        <td>0.265299006947068</td>
+                                        <td>2.1535203583795925</td>
+                                        <td>0.04506700541804473</td>
+                                        <td>0.09583904826135253</td>
+                                        <td>0.14494275693755096</td>
+                                        <td>0.07765533492039568</td>
+                                        <td>0.5077586455403555</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">min</th>
+                                        <td>-0.85742</td>
+                                        <td>0.036368</td>
+                                        <td>-1.92527</td>
+                                        <td>0.000118</td>
+                                        <td>0.0</td>
+                                        <td>-0.685429</td>
+                                        <td>0.0</td>
+                                        <td>0.0</td>
+                                        <td>0.002044</td>
+                                        <td>0.001712</td>
+                                        <td>0.00626</td>
+                                        <td>-0.234469</td>
+                                        <td>0.0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">25%</th>
+                                        <td>-0.78250575</td>
+                                        <td>0.4989909</td>
+                                        <td>-0.37233875</td>
+                                        <td>0.0363635</td>
+                                        <td>0.762462</td>
+                                        <td>0.061399</td>
+                                        <td>0.2773</td>
+                                        <td>0.0</td>
+                                        <td>0.011321</td>
+                                        <td>0.2651</td>
+                                        <td>0.0347839</td>
+                                        <td>-0.014061740/td>
+                                        <td>3.72736</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">50%</th>
+                                        <td>-0.689451</td>
+                                        <td>0.587787</td>
+                                        <td>-0.245177</td>
+                                        <td>0.081779</td>
+                                        <td>1.208474</td>
+                                        <td>0.3432775</td>
+                                        <td>0.475754</td>
+                                        <td>2.633959</td>
+                                        <td>0.024493</td>
+                                        <td>0.355136</td>
+                                        <td>0.075482</td>
+                                        <td>0.0459485</td>
+                                        <td>3.72736</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">75%</th>
+                                        <td>-0.16665825</td>
+                                        <td>0.656779</td>
+                                        <td>-0.122154</td>
+                                        <td>0.144848</td>
+                                        <td>1.770382</td>
+                                        <td>0.54565575</td>
+                                        <td>0.601851</td>
+                                        <td>4.556001</td>
+                                        <td>0.050996</td>
+                                        <td>0.404552</td>
+                                        <td>0.1600849</td>
+                                        <td>0.08792825</td>
+                                        <td>3.72736</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">max</th>
+                                        <td>0.8950879</td>
+                                        <td>0.6931470</td>
+                                        <td>0.38944</td>
+                                        <td>0.554518</td>
+                                        <td>5.076633</td>
+                                        <td>0.720155</td>
+                                        <td>1.458539</td>
+                                        <td>6.524576</td>
+                                        <td>0.415888</td>
+                                        <td>0.415888</td>
+                                        <td>1.386294</td>
+                                        <td>0.278618</td>
+                                        <td>3.72736</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- end row -->
+              <div class="row">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="header-title">Data Feature processing</h4>
+                    <div class="row">
+                      <div class="col-xl-8">
+                        <div>
+                          <div class="row">
+                            <div>
+                              <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                              <div class="">
+                                <img src="assets\images\AdataImg\fea_corr.jpg" class="img-fluid">
+                            </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- end product img -->
+                      </div>
+                      <div class="col-xl-4 mb-3">
+                        <div class="mb-3">
+                          <div style="height: 500px; overflow: auto">
+                            <div
+                              style="
+
+                                margin: 5px;
+                              "
+                            ><img src="assets\images\AdataImg\train_fea_dis_2fea_1.jpg" class="img-fluid"></div>
+                            <div
+                              style="
+
+                                margin: 5px;
+                              "
+                            ><img src="assets\images\AdataImg\train_fea_dis_2fea_2.jpg" class="img-fluid"></div>
+                            <div
+                              style="
+
+                                margin: 5px;
+                              "
+                            ><img src="assets\images\AdataImg\train_fea_dis_2fea_3.jpg" class="img-fluid"></div>
+                            <div
+                              style="
+
+                                margin: 5px;
+                              "
+                            ><img src="assets\images\AdataImg\train_fea_dis_2fea_4.jpg" class="img-fluid"></div>
+                            <div
+                              style="
+
+                                margin: 5px;
+                              "
+                            ><img src="assets\images\AdataImg\train_fea_dis_2fea_5.jpg" class="img-fluid"></div>
+                            <div
+                              style="
+
+                                margin: 5px;
+                              "
+                            ><img src="assets\images\AdataImg\train_fea_dis_2fea_6.jpg" class="img-fluid"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <h4 class="header-title mb-3" style="margin-top: 40px;">Code debugging</h4>
+                    <div class="row">
+                        <div class="mb-3 col-xl-6">
+                            <div>
+                                <textarea class="form-control" rows="7" style="background-color: grey; color: #ffffff;">
+                                  # 缺失值填充
+                                  for column in list(df_train.columns[df_train.isnull().sum() > 0]):
+                                      mean_val = df_train[column].mean()
+                                      df_train[column].fillna(mean_val, inplace=True)
+                                      df_test[column].fillna(mean_val, inplace=True)
+                                  print(df_train.shape)
+                                </textarea>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-xl-6 row">
+                            <div class="col-xl-5" style="display:flex;flex-direction:column; justify-content: space-between;">
+                                <button type="button" class="btn btn-info waves-effect waves-light" style="margin-bottom:10px; margin-top: 5px;">normalization</button>
+                                <button type="button" class="btn btn-info waves-effect waves-light" style="margin-bottom:10px;">padding</button>
+                                <button type="button" class="btn btn-info waves-effect waves-light">Deletion of outliers</button>
+                            </div>
+                            <div class="mb-3 col-xl-5">
+                                <div style="display: flex; flex-direction: column; justify-content: center;">
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="radio" name="formRadios"
+                                            id="formRadios1" checked>
+                                        <label class="form-check-label" for="formRadios1">
+                                            mean
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="radio" name="formRadios"
+                                            id="formRadios1" checked>
+                                        <label class="form-check-label" for="formRadios1">
+                                            median
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="formRadios"
+                                            id="formRadios2">
+                                        <label class="form-check-label" for="formRadios2">
+                                            Delete
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      
+                    </div>
+                    <div class="table-responsive">
+                    <h4 class="header-title mb-3" style="margin-top: 40px;">Output data & distribution characteristics</h4>
+                    <table
+                    id="datatable"
+                    class="table table-bordered dt-responsive nowrap"
+                    style="
+                      border-collapse: collapse;
+                      border-spacing: 0;
+                      width: 100%;
+                      overflow: auto;
+                    "
+                  >
+                    <thead>
+                      <tr>
+                        <th>id</th>
+                        <th>age</th>
+                        <th>job</th>
+                        <th>marital</th>
+                        <th>educaiton</th>
+                        <th>default</th>
+                        <th>housing</th>
+                        <th>loan</th>
+                        <th>emp var rate</th>
+                        <th>nr employed</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr>
+                        <td>24</td>
+                        <td>67</td>
+                        <td>technician</td>
+                        <td>married</td>
+                        <td>basic.4y</td>
+                        <td>unknown</td>
+                        <td>no</td>
+                        <td>yes</td>
+                        <td>-3.4</td>
+                        <td>4962.3</td>
+                      </tr>
+                      <tr>
+                          <td>28</td>
+                          <td>38</td>
+                          <td>technician</td>
+                          <td>divorced</td>
+                          <td>university.degree</td>
+                          <td>no</td>
+                          <td>no</td>
+                          <td>no</td>
+                          <td>1.4</td>
+                          <td>5215.03</td>
+                      </tr>
+                      <tr>
+                          <td>31</td>
+                          <td>98</td>
+                          <td>blue-collar</td>
+                          <td>divorced</td>
+                          <td>basic.9y</td>
+                          <td>no</td>
+                          <td>yes</td>
+                          <td>yes</td>
+                          <td>1.4</td>
+                          <td>5276.92</td>
+                      </tr>
+                      <tr>
+                          <td>35</td>
+                          <td>66</td>
+                          <td>admin</td>
+                          <td>married</td>
+                          <td>university.degree</td>
+                          <td>no</td>
+                          <td>yes</td>
+                          <td>no</td>
+                          <td>-1.7</td>
+                          <td>5081.44</td>
+                      </tr>
+                      <tr>
+                          <td>39</td>
+                          <td>71</td>
+                          <td>retired</td>
+                          <td>married</td>
+                          <td>professional.degree</td>
+                          <td>no</td>
+                          <td>no</td>
+                          <td>yes</td>
+                          <td>-3.4</td>
+                          <td>4811.83</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                    </div>
+                    <div style="display: flex; flex-wrap: wrap">
+                      <div
+                        style="
+                          width: 250px;
+                          margin: 5px;
+                        "
+                      ><img src="assets\images\AdataImg\train_feav143_dis.jpg" class="img-fluid"></div>
+                      <div
+                        style="
+                          width: 250px;
+                          margin: 5px;
+                        "
+                      ><img src="assets\images\AdataImg\train_feav225_dis.jpg" class="img-fluid"></div>
+                      <div
+                      style="
+                        width: 250px;
+                        margin: 5px;
+                      "
+                    ><img src="assets\images\AdataImg\train_feav451_dis.jpg" class="img-fluid"></div>
+                        <div
+                        style="
+                        width: 250px;
+                        margin: 5px;
+                        "
+                    ><img src="assets\images\AdataImg\train_feav472_dis.jpg" class="img-fluid"></div>
+                    <div
+                    style="
+                        width: 250px;
+                        margin: 5px;
+                    "
+                    ><img src="assets\images\AdataImg\train_feav650_dis.jpg" class="img-fluid"></div>
+                        <div
+                        style="
+                        width: 250px;
+                        margin: 5px;
+                        "
+                    ><img src="assets\images\AdataImg\train_feav691_dis.jpg" class="img-fluid"></div>
+                    <div
+                    style="
+                        width: 250px;
+                        margin: 5px;
+                    "
+                    ><img src="assets\images\AdataImg\train_feav924_dis.jpg" class="img-fluid"></div>
+                    <div
+                    style="
+                      width: 250px;
+                      margin: 5px;
+                    "
+                  ><img src="assets\images\AdataImg\train_feav945_dis.jpg" class="img-fluid"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- end row -->
+            </div>
+          </div>
+          <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+        <footer class="footer">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-6">
+                <script>
+                  document.write(new Date().getFullYear());
+                </script>
+                © Giraffe.
+              </div>
+              
+            </div>
+          </div>
+        </footer>
+      </div>
+      <!-- end main content-->
+    </div>
+    <!-- END layout-wrapper -->
+
+   <!-- Right Sidebar -->
+   <div class="right-bar">
+    <div data-simplebar class="h-100">
+        <div class="rightbar-title d-flex align-items-center px-3 py-4">
+    
+            <h5 class="m-0 me-2">Settings</h5>
+
+            <a href="javascript:void(0);" class="right-bar-toggle ms-auto">
+                <i class="mdi mdi-close noti-icon"></i>
+            </a>
+        </div>
+
+        <!-- Settings -->
+        <hr class="mt-0" />
+
+        <div class="p-4">
+
+            <div class="form-check form-switch mb-3">
+                <input class="form-check-input theme-choice" type="checkbox" id="light-mode-switch" checked>
+                <label class="form-check-label" for="light-mode-switch">Light Mode</label>
+            </div>
+
+            <div class="form-check form-switch mb-3">
+                <input class="form-check-input theme-choice" type="checkbox" id="dark-mode-switch" data-bsStyle="assets/css/bootstrap-dark.min.css" data-appStyle="assets/css/app-dark.min.css">
+                <label class="form-check-label" for="dark-mode-switch">Dark Mode</label>
+            </div>
+    
+        </div>
+
+    </div> <!-- end slimscroll-menu-->
+</div>
+<!-- /Right-bar -->
+
+    <!-- Right bar overlay-->
+    <div class="rightbar-overlay"></div>
+
+    <script>
+      var DonutChart = echarts.init(document.getElementById('donut'));
+    
+    // 指定图表的配置项和数据
+    option = {
+        tooltip: {
+            trigger: 'item'
+        },
+        series: [
+        {
+            name: 'Access From',
+            type: 'pie',
+            radius: ['50%', '90%'],
+            itemStyle: {
+                borderRadius: 30,
+                borderColor: '#fff',
+                borderWidth: 2
+            },
+            data: [
+                { value: 1543, name: '违约' },
+                { value:  71957, name: '守约' }
+            ],
+            emphasis: {
+                label: {
+                show: true,
+                fontSize: '35',
+                fontWeight: 'bold'
+                }
+            },
+            label: {
+                show: false,
+                position: 'center'
+            },
+        }
+        ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    DonutChart.setOption(option);
+      // hover事件 window.onload只能写一个
+      window.onload = function(){
+          hover_change()//复制这个
+      }
+      //复制这个
+      var hover_change = function(){
+          var tab_list = document.querySelector('.tab-list');
+          var lis = tab_list.querySelectorAll('li');
+          var descs = document.querySelectorAll('.desc');
+          for(let i=0;i<lis.length;i++){
+              lis[i].setAttribute('index',i)
+              lis[i].onmouseover =function(){
+                  for(let j =0;j<lis.length;j++){
+                      lis[i].className = ''
+                 }
+                 this.className = 'active'
+                 let index = this.getAttribute('index')
+                 for(let j =0;j<descs.length;j++){
+                  descs[j].style.display = 'none'
+                 }
+                 descs[index].style.display = 'flex'
+              }
+
+              lis[i].onmouseout  =function(){
+                 this.className = ''
+                 let index = this.getAttribute('index')
+                 descs[index].style.display = 'none'
+              }
+          }
+      }
+     
+  </script>
+
+    <script type="text/javascript">
+      // 基于准备好的dom，初始化echarts实例
+      var myChart = echarts.init(document.getElementById("main"));
+
+      // 指定图表的配置项和数据
+      var option = {
+        xAxis: {
+          data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"],
+        },
+        yAxis: {},
+        series: [
+          {
+            name: "销量",
+            type: "bar",
+            data: [5, 20, 36, 10, 10, 20],
+          },
+        ],
+      };
+
+      // 使用刚指定的配置项和数据显示图表。
+      myChart.setOption(option);
+
+      var heatmap = echarts.init(document.getElementById("heatmap"));
+
+      // 指定图表的配置项和数据
+      const hours = [
+        "12a",
+        "1a",
+        "2a",
+        "3a",
+        "4a",
+        "5a",
+        "6a",
+        "7a",
+        "8a",
+        "9a",
+        "10a",
+        "11a",
+        "12p",
+        "1p",
+        "2p",
+        "3p",
+        "4p",
+        "5p",
+        "6p",
+        "7p",
+        "8p",
+        "9p",
+        "10p",
+        "11p",
+      ];
+      // prettier-ignore
+      const days = [
+                'Saturday', 'Friday', 'Thursday',
+                'Wednesday', 'Tuesday', 'Monday', 'Sunday'
+            ];
+      // prettier-ignore
+      const data = [[0, 0, 5], [0, 1, 1], [0, 2, 0], [0, 3, 0], [0, 4, 0], [0, 5, 0], [0, 6, 0], [0, 7, 0], [0, 8, 0], [0, 9, 0], [0, 10, 0], [0, 11, 2], [0, 12, 4], [0, 13, 1], [0, 14, 1], [0, 15, 3], [0, 16, 4], [0, 17, 6], [0, 18, 4], [0, 19, 4], [0, 20, 3], [0, 21, 3], [0, 22, 2], [0, 23, 5], [1, 0, 7], [1, 1, 0], [1, 2, 0], [1, 3, 0], [1, 4, 0], [1, 5, 0], [1, 6, 0], [1, 7, 0], [1, 8, 0], [1, 9, 0], [1, 10, 5], [1, 11, 2], [1, 12, 2], [1, 13, 6], [1, 14, 9], [1, 15, 11], [1, 16, 6], [1, 17, 7], [1, 18, 8], [1, 19, 12], [1, 20, 5], [1, 21, 5], [1, 22, 7], [1, 23, 2], [2, 0, 1], [2, 1, 1], [2, 2, 0], [2, 3, 0], [2, 4, 0], [2, 5, 0], [2, 6, 0], [2, 7, 0], [2, 8, 0], [2, 9, 0], [2, 10, 3], [2, 11, 2], [2, 12, 1], [2, 13, 9], [2, 14, 8], [2, 15, 10], [2, 16, 6], [2, 17, 5], [2, 18, 5], [2, 19, 5], [2, 20, 7], [2, 21, 4], [2, 22, 2], [2, 23, 4], [3, 0, 7], [3, 1, 3], [3, 2, 0], [3, 3, 0], [3, 4, 0], [3, 5, 0], [3, 6, 0], [3, 7, 0], [3, 8, 1], [3, 9, 0], [3, 10, 5], [3, 11, 4], [3, 12, 7], [3, 13, 14], [3, 14, 13], [3, 15, 12], [3, 16, 9], [3, 17, 5], [3, 18, 5], [3, 19, 10], [3, 20, 6], [3, 21, 4], [3, 22, 4], [3, 23, 1], [4, 0, 1], [4, 1, 3], [4, 2, 0], [4, 3, 0], [4, 4, 0], [4, 5, 1], [4, 6, 0], [4, 7, 0], [4, 8, 0], [4, 9, 2], [4, 10, 4], [4, 11, 4], [4, 12, 2], [4, 13, 4], [4, 14, 4], [4, 15, 14], [4, 16, 12], [4, 17, 1], [4, 18, 8], [4, 19, 5], [4, 20, 3], [4, 21, 7], [4, 22, 3], [4, 23, 0], [5, 0, 2], [5, 1, 1], [5, 2, 0], [5, 3, 3], [5, 4, 0], [5, 5, 0], [5, 6, 0], [5, 7, 0], [5, 8, 2], [5, 9, 0], [5, 10, 4], [5, 11, 1], [5, 12, 5], [5, 13, 10], [5, 14, 5], [5, 15, 7], [5, 16, 11], [5, 17, 6], [5, 18, 0], [5, 19, 5], [5, 20, 3], [5, 21, 4], [5, 22, 2], [5, 23, 0], [6, 0, 1], [6, 1, 0], [6, 2, 0], [6, 3, 0], [6, 4, 0], [6, 5, 0], [6, 6, 0], [6, 7, 0], [6, 8, 0], [6, 9, 0], [6, 10, 1], [6, 11, 0], [6, 12, 2], [6, 13, 1], [6, 14, 3], [6, 15, 4], [6, 16, 0], [6, 17, 0], [6, 18, 0], [6, 19, 0], [6, 20, 1], [6, 21, 2], [6, 22, 2], [6, 23, 6]]
+                .map(function (item) {
+                return [item[1], item[0], item[2] || '-'];
+            });
+      option = {
+        tooltip: {
+          position: "top",
+        },
+        grid: {
+          height: "50%",
+          top: "10%",
+        },
+        xAxis: {
+          type: "category",
+          data: hours,
+          splitArea: {
+            show: true,
+          },
+        },
+        yAxis: {
+          type: "category",
+          data: days,
+          splitArea: {
+            show: true,
+          },
+        },
+        visualMap: {
+          min: 0,
+          max: 10,
+          calculable: true,
+          orient: "horizontal",
+          left: "center",
+          bottom: "90%",
+        },
+        series: [
+          {
+            name: "Punch Card",
+            type: "heatmap",
+            data: data,
+            label: {
+              show: true,
+            },
+            emphasis: {
+              itemStyle: {
+                shadowBlur: 10,
+                shadowColor: "rgba(0, 0, 0, 0.5)",
+              },
+            },
+          },
+        ],
+      };
+
+      // 使用刚指定的配置项和数据显示图表。
+      heatmap.setOption(option);
+    </script>
+
+    <!-- JAVASCRIPT -->
+    <script src="assets/libs/jquery/jquery.min.js"></script>
+    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/libs/metismenu/metisMenu.min.js"></script>
+    <script src="assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="assets/libs/node-waves/waves.min.js"></script>
+
+    <!-- Table Editable plugin -->
+    <script src="assets/libs/table-edits/build/table-edits.min.js"></script>
+
+    <script src="assets/js/pages/table-editable.init.js"></script>
+
+    <!-- Chart JS -->
+    <script src="assets/libs/chart.js/Chart.bundle.min.js"></script>
+    <script src="assets/js/pages/chartjs.init.js"></script>
+
+    <!-- apexcharts -->
+    <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
+
+    <!-- Required datatable js -->
+    <script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <!-- Buttons examples -->
+    <script src="assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+    <script src="assets/libs/jszip/jszip.min.js"></script>
+    <script src="assets/libs/pdfmake/build/pdfmake.min.js"></script>
+    <script src="assets/libs/pdfmake/build/vfs_fonts.js"></script>
+    <script src="assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+    <!-- Responsive examples -->
+    <script src="assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+
+    <!-- Datatable init js -->
+    <script src="assets/js/pages/datatables.init.js"></script>
+
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>

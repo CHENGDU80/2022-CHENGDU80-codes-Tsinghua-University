@@ -1,0 +1,1386 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Training | Giraffe - Model Training</title>
+
+    <!-- 引入 echarts.js -->
+    <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
+
+    <script
+      type="text/javascript"
+      src="assets/js/pages/jquery.svg.pan.zoom.js"
+    ></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      content="Premium Multipurpose Admin & Dashboard Template"
+      name="description"
+    />
+    <meta content="Themesdesign" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico" />
+    <!-- plugin css -->
+    <link
+      href="assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <!-- Bootstrap Css -->
+    <link
+      href="assets/css/bootstrap.min.css"
+      id="bootstrap-style"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- Icons Css -->
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link
+      href="assets/css/app.min.css"
+      id="app-style"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <!-- DataTables -->
+    <link
+      href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="assets/libs/datatables.net-autoFill-bs4/css/autoFill.bootstrap4.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="assets/libs/datatables.net-keytable-bs4/css/keyTable.bootstrap4.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <!-- Responsive datatable examples -->
+    <link
+      href="assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <style>
+      .propo-box {
+        width: 100%;
+        height: auto;
+      }
+      .propo-box .ti {
+        color: #101010;
+        font-size: 14px;
+        text-align: left;
+        font-family: SourceHanSansSC-regular;
+      }
+      .propo-box .pro-box {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+      }
+      .propo-box .pro-box .item {
+        font-size: 14px;
+        margin-right: 3%;
+        flex-direction: column;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-bottom: 20px;
+        border: 4px solid #fff;
+      }
+      .propo-box .pro-box .item .img {
+        width: 100%;
+        height: 120px;
+      }
+      .propo-box .pro-box .item .name {
+        margin-top: 5px;
+      }
+      .propo-box .pro-box .item .desc {
+        margin-top: 2px;
+      }
+      .propo-box .pro-box .pro-act {
+        border: 4px solid #7f83f7;
+      }
+      .choose-pro-bo {
+        margin-top: 20px;
+      }
+      .choose-pro-bo .ti {
+        color: #101010;
+        font-size: 14px;
+        text-align: left;
+        font-family: SourceHanSansSC-regular;
+      }
+      .choose-pro-bo .choose-box {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .choose-pro-bo .choose-box .item {
+        width: 150px;
+        display: flex;
+        align-items: center;
+        height: 40px;
+      }
+      .choose-pro-bo .choose-box .item .out {
+        width: 10px;
+        height: 10px;
+        border: 1px solid #ccc;
+        border-radius: 2px;
+      }
+      .choose-pro-bo .choose-box .item .actic {
+        background-color: #0094ff;
+        border: 1px solid #0094ff;
+      }
+      .choose-pro-bo .choose-box .item .te {
+        margin-left: 10px;
+        font-size: 12px;
+        color: #101010;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+      <header id="page-topbar">
+        <div class="navbar-header">
+          <div class="d-flex">
+            <!-- LOGO -->
+            <div class="navbar-brand-box">
+              <a href="AuserAppli.html" class="logo logo-dark">
+                <span class="logo-sm">
+                  <img src="assets/images/logo-sm.png" alt="" height="52" />
+                </span>
+                <span class="logo-lg">
+                  <img src="assets/images/logo-dark.png" alt="" height="50" />
+                </span>
+              </a>
+
+              <a href="AuserAppli.html" class="logo logo-light">
+                <span class="logo-sm">
+                  <img src="assets/images/logo-sm.png" alt="" height="52" />
+                </span>
+                <span class="logo-lg">
+                  <img src="assets/images/logo-light.png" alt="" height="50" />
+                </span>
+              </a>
+            </div>
+
+            <button
+              type="button"
+              class="btn btn-sm px-3 font-size-24 header-item waves-effect"
+              id="vertical-menu-btn"
+            >
+              <i class="mdi mdi-menu"></i>
+            </button>
+
+            <div class="topbar-social-icon me-3 d-none d-md-block">
+              <ul class="list-inline title-tooltip m-0">
+                <li class="list-inline-item">
+                  <a
+                    href="email-inbox.html"
+                    data-bs-toggle="tooltip"
+                    data-placement="top"
+                    title="Email"
+                  >
+                    <i class="mdi mdi-email-outline"></i>
+                  </a>
+                </li>
+
+                <li class="list-inline-item">
+                  <a
+                    href="chat.html"
+                    data-bs-toggle="tooltip"
+                    data-placement="top"
+                    title="Chat"
+                  >
+                    <i class="mdi mdi-tooltip-outline"></i>
+                  </a>
+                </li>
+
+                <li class="list-inline-item">
+                  <a
+                    href="calendar.html"
+                    data-bs-toggle="tooltip"
+                    data-placement="top"
+                    title="Calendar"
+                  >
+                    <i class="mdi mdi-calendar"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Search input -->
+          <div class="search-wrap" id="search-wrap">
+            <div class="search-bar">
+              <input class="search-input form-control" placeholder="Search" />
+              <a
+                href="#"
+                class="close-search toggle-search"
+                data-target="#search-wrap"
+              >
+                <i class="mdi mdi-close-circle"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="d-flex">
+            <div class="dropdown d-none d-lg-inline-block">
+              <button
+                type="button"
+                class="btn header-item toggle-search noti-icon waves-effect"
+                data-target="#search-wrap"
+              >
+                <i class="mdi mdi-magnify"></i>
+              </button>
+            </div>
+
+            <div class="dropdown d-none d-md-block ms-2">
+              <button
+                type="button"
+                class="btn header-item waves-effect"
+                data-bs-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <img
+                  class="me-2"
+                  src="assets/images/flags/us.jpg"
+                  alt="Header Language"
+                  height="16"
+                />
+                English <span class="mdi mdi-chevron-down"></span>
+              </button>
+              <div class="dropdown-menu dropdown-menu-end">
+                <!-- item-->
+                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                  <img
+                    src="assets/images/flags/germany.jpg"
+                    alt="user-image"
+                    class="me-1"
+                    height="12"
+                  />
+                  <span class="align-middle"> German </span>
+                </a>
+              </div>
+            </div>
+
+            <div class="dropdown d-none d-lg-inline-block ms-1">
+              <button
+                type="button"
+                class="btn header-item noti-icon waves-effect"
+                data-toggle="fullscreen"
+              >
+                <i class="mdi mdi-fullscreen"></i>
+              </button>
+            </div>
+
+            <div class="dropdown d-inline-block">
+              <button
+                type="button"
+                class="btn header-item waves-effect"
+                id="page-header-user-dropdown"
+                data-bs-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <img
+                  class="rounded-circle header-profile-user"
+                  src="assets/images/users/avatar-7.jpg"
+                  alt="Header Avatar"
+                />
+                <span class="d-none d-xl-inline-block ms-1">THU</span>
+                <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+              </button>
+              <div class="dropdown-menu dropdown-menu-end">
+                <a class="dropdown-item text-danger" href="#"
+                  ><i
+                    class="mdi mdi-power font-size-16 align-middle me-1 text-danger"
+                  ></i>
+                  Logout</a
+                >
+              </div>
+            </div>
+
+            <div class="dropdown d-inline-block">
+              <button
+                type="button"
+                class="btn header-item noti-icon right-bar-toggle waves-effect"
+              >
+                <i class="mdi mdi-cog-outline font-size-20"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- ========== Left Sidebar Start ========== -->
+      <div class="vertical-menu">
+        <div data-simplebar class="h-100">
+          <div class="user-sidebar text-center">
+            <div class="dropdown">
+              <div class="user-img">
+                <img
+                  src="assets/images/users/avatar-7.jpg"
+                  alt=""
+                  class="rounded-circle"
+                />
+                <span class="avatar-online bg-success"></span>
+              </div>
+              <div class="user-info">
+                <h5 class="mt-3 font-size-16 text-white">THU Giraffe</h5>
+                <span class="font-size-13 text-white-50">Administrator</span>
+              </div>
+            </div>
+          </div>
+
+          <!--- Sidemenu -->
+          <div id="sidebar-menu">
+            <!-- Left Menu Start -->
+            <ul class="metismenu list-unstyled" id="side-menu">
+              <li class="menu-title">Operation</li>
+              <li>
+                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                  <i class="dripicons-user"></i>
+                  <span>Application</span>
+                </a>
+                <ul class="sub-menu" aria-expanded="false">
+                  <li><a href="AuserAppli.html">User Apply</a></li>
+                  <li><a href="AreviewAppli.html">Review</a></li>
+                  <li><a href="AResultPage.html">Result</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                  <i class="dripicons-pulse"></i>
+                  <span>Training</span>
+                </a>
+                <ul class="sub-menu" aria-expanded="false">
+                  <li><a href="AData.html">Data Processing</a></li>
+                  <li><a href="ATraining.html">Model Training</a></li>
+                  <li><a href="Ahistory.html">Model Training</a></li>
+                </ul>
+              </li>
+              <li class="menu-title">Other</li>
+              <li>
+                <a href="calendar.html" class="waves-effect">
+                  <i class="dripicons-calendar"></i>
+                  <span>Calendar</span>
+                </a>
+              </li>
+
+              <li>
+                <a href="chat.html" class="waves-effect">
+                  <i class="dripicons-message"></i>
+                  <span>Chat</span>
+                </a>
+              </li>
+
+              <li>
+                <a href="email-inbox.html" class="waves-effect">
+                  <i class="dripicons-mail"></i>
+                  <span>Email</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <!-- Sidebar -->
+        </div>
+      </div>
+      <!-- Left Sidebar End -->
+
+      <!-- ============================================================== -->
+      <!-- Start right Content here -->
+      <!-- ============================================================== -->
+      <div class="main-content">
+        <div class="page-content">
+          <!-- start page title -->
+          <div class="page-title-box">
+            <div class="container-fluid">
+              <div class="row align-items-center">
+                <div class="col-sm-6">
+                  <div class="page-title">
+                    <h4>Model Training</h4>
+                    <ol class="breadcrumb m-0">
+                      <li class="breadcrumb-item">
+                        <a href="javascript: void(0);">Giraffe</a>
+                      </li>
+                      <li class="breadcrumb-item">
+                        <a href="javascript: void(0);">Training</a>
+                      </li>
+                      <li class="breadcrumb-item active">
+                        Model Training
+                      </li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end page title -->
+
+          <div class="container-fluid">
+            <div class="page-content-wrapper">
+              <div class="row">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="header-title">Training data selection</h4>
+                    <div class="row">
+                      <div class="col-lg-2">
+                        <h5 class="font-size-16">Data Selection</h5>
+                        <div
+                          id="accordion"
+                          class="custom-accordion categories-accordion"
+                        >
+                          <div class="categories-group-card">
+                            <a
+                              href="#collapseOne"
+                              class="categories-group-list collapsed"
+                              data-bs-toggle="collapse"
+                              aria-expanded="false"
+                              aria-controls="collapseOne"
+                            >
+                              Dataset1
+                            </a>
+                          </div>
+
+                          <div class="categories-group-card">
+                            <a
+                              href="#collapseTwo"
+                              class="categories-group-list"
+                              data-bs-toggle="collapse"
+                              aria-expanded="true"
+                              aria-controls="collapseTwo"
+                            >
+                              Dataset2
+                              <i
+                                class="mdi mdi-minus float-end accor-plus-icon"
+                              ></i>
+                            </a>
+                            <div
+                              id="collapseTwo"
+                              class="collapse show"
+                              data-parent="#accordion"
+                            >
+                              <div>
+                                <ul class="list-unstyled categories-list mb-0">
+                                  <li class="active">
+                                    <a href="#"
+                                      ><i
+                                        class="mdi mdi-circle-medium me-1"
+                                      ></i>
+                                      Behaviour.csv
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a href="#"
+                                      ><i
+                                        class="mdi mdi-circle-medium me-1"
+                                      ></i>
+                                      transport.csv
+                                    </a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="categories-group-card">
+                            <a
+                              href="#collapseThree"
+                              class="categories-group-list collapsed"
+                              data-bs-toggle="collapse"
+                              aria-expanded="false"
+                              aria-controls="collapseThree"
+                            >
+                              Dataset3
+                            </a>
+                          </div>
+
+                          <div class="categories-group-card">
+                            <a
+                              href="#collapseFour"
+                              class="categories-group-list collapsed"
+                              data-bs-toggle="collapse"
+                              aria-expanded="false"
+                              aria-controls="collapseFour"
+                            >
+                              Dataset4
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-9">
+                        <div class="mb-3">
+                          <label
+                            class="form-label"
+                            for="basicpill-firstname-input"
+                            >Project Name</label
+                          >
+                          <table
+                            id="datatable"
+                            class="table table-bordered dt-responsive nowrap"
+                            style="
+                              border-collapse: collapse;
+                              border-spacing: 0;
+                              width: 100%;
+                              overflow: auto;
+                            "
+                          >
+                            <thead>
+                              <tr>
+                                <th>id</th>
+                                <th>age</th>
+                                <th>job</th>
+                                <th>marital</th>
+                                <th>educaiton</th>
+                                <th>default</th>
+                                <th>housing</th>
+                                <th>loan</th>
+                                <th>emp var rate</th>
+                                <th>nr employed</th>
+                              </tr>
+                            </thead>
+
+                            <tbody>
+                              <tr>
+                                <td>24</td>
+                                <td>67</td>
+                                <td>technician</td>
+                                <td>married</td>
+                                <td>basic.4y</td>
+                                <td>unknown</td>
+                                <td>no</td>
+                                <td>yes</td>
+                                <td>-3.4</td>
+                                <td>4962.3</td>
+                              </tr>
+                              <tr>
+                                <td>28</td>
+                                <td>38</td>
+                                <td>technician</td>
+                                <td>divorced</td>
+                                <td>university.degree</td>
+                                <td>no</td>
+                                <td>no</td>
+                                <td>no</td>
+                                <td>1.4</td>
+                                <td>5215.03</td>
+                              </tr>
+                              <tr>
+                                <td>31</td>
+                                <td>98</td>
+                                <td>blue-collar</td>
+                                <td>divorced</td>
+                                <td>basic.9y</td>
+                                <td>no</td>
+                                <td>yes</td>
+                                <td>yes</td>
+                                <td>1.4</td>
+                                <td>5276.92</td>
+                              </tr>
+                              <tr>
+                                <td>35</td>
+                                <td>66</td>
+                                <td>admin</td>
+                                <td>married</td>
+                                <td>university.degree</td>
+                                <td>no</td>
+                                <td>yes</td>
+                                <td>no</td>
+                                <td>-1.7</td>
+                                <td>5081.44</td>
+                              </tr>
+                              <tr>
+                                <td>39</td>
+                                <td>71</td>
+                                <td>retired</td>
+                                <td>married</td>
+                                <td>professional.degree</td>
+                                <td>no</td>
+                                <td>no</td>
+                                <td>yes</td>
+                                <td>-3.4</td>
+                                <td>4811.83</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <h5 class="font-size-16">
+                          Overview of data distribution
+                        </h5>
+                        <div class="propo-box">
+                          <div class="ti"></div>
+                          <div
+                            style="display: flex; flex-wrap: wrap"
+                            class="pro-box"
+                          >
+                            <div style="width: 250px; margin: 5px" class="item">
+                              <img
+                                src="assets\images\AdataImg\train_feav143_dis.jpg"
+                                class="img-fluid"
+                              />
+                            </div>
+                            <div style="width: 250px; margin: 5px" class="item">
+                              <img
+                                src="assets\images\AdataImg\train_feav225_dis.jpg"
+                                class="img-fluid"
+                              />
+                            </div>
+                            <div style="width: 250px; margin: 5px" class="item">
+                              <img
+                                src="assets\images\AdataImg\train_feav451_dis.jpg"
+                                class="img-fluid"
+                              />
+                            </div>
+                            <div style="width: 250px; margin: 5px" class="item">
+                              <img
+                                src="assets\images\AdataImg\train_feav472_dis.jpg"
+                                class="img-fluid"
+                              />
+                            </div>
+                            <div style="width: 250px; margin: 5px" class="item">
+                              <img
+                                src="assets\images\AdataImg\train_feav650_dis.jpg"
+                                class="img-fluid"
+                              />
+                            </div>
+                            <div style="width: 250px; margin: 5px" class="item">
+                              <img
+                                src="assets\images\AdataImg\train_feav691_dis.jpg"
+                                class="img-fluid"
+                              />
+                            </div>
+                            <div style="width: 250px; margin: 5px" class="item">
+                              <img
+                                src="assets\images\AdataImg\train_feav924_dis.jpg"
+                                class="img-fluid"
+                              />
+                            </div>
+                            <div style="width: 250px; margin: 5px" class="item">
+                              <img
+                                src="assets\images\AdataImg\train_feav945_dis.jpg"
+                                class="img-fluid"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="choose-pro-bo">
+                          <div class="ti">Training feature selection</div>
+                          <div class="choose-box" id="choose-all-not">
+                            <div class="item">
+                              <div class="out"></div>
+                              <div class="te">Select All</div>
+                            </div>
+                            <div class="item">
+                              <div class="out"></div>
+                              <div class="te">Cancel All</div>
+                            </div>
+                          </div>
+                          <div class="choose-box" id="choose-te-items">
+                            <div class="item">
+                              <div class="out"></div>
+                              <div class="te">Feature 1</div>
+                            </div>
+                            <div class="item">
+                              <div class="out"></div>
+                              <div class="te">Feature 2</div>
+                            </div>
+                            <div class="item">
+                              <div class="out"></div>
+                              <div class="te">Feature 3</div>
+                            </div>
+                            <div class="item">
+                              <div class="out"></div>
+                              <div class="te">Feature 4</div>
+                            </div>
+                            <div class="item">
+                              <div class="out"></div>
+                              <div class="te">Feature 5</div>
+                            </div>
+                            <div class="item">
+                              <div class="out"></div>
+                              <div class="te">Feature 6</div>
+                            </div>
+                            <div class="item">
+                              <div class="out"></div>
+                              <div class="te">Feature 7</div>
+                            </div>
+                            <div class="item">
+                              <div class="out"></div>
+                              <div class="te">Feature 8</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- end row -->
+              <div class="row">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="header-title">Algorithm Selection</h4>
+                    <div class="row">
+                      <div class="col-md-3">
+                        <div
+                          class="nav flex-column nav-pills"
+                          id="v-pills-tab"
+                          role="tablist"
+                          aria-orientation="vertical"
+                        >
+                          <a
+                            class="nav-link mb-2 active"
+                            id="v-pills-home-tab"
+                            data-bs-toggle="pill"
+                            href="#v-pills-home"
+                            role="tab"
+                            aria-controls="v-pills-home"
+                            aria-selected="true"
+                            ><img
+                              src="assets\images\AdataImg\leave.png"
+                              alt=""
+                              height="32"
+                              style="margin-right: 10px"
+                            />Decision tree</a
+                          >
+                          <a
+                            class="nav-link mb-2"
+                            id="v-pills-profile-tab"
+                            data-bs-toggle="pill"
+                            href="#v-pills-profile"
+                            role="tab"
+                            aria-controls="v-pills-profile"
+                            aria-selected="false"
+                            ><img
+                              src="assets\images\AdataImg\bp.png"
+                              alt=""
+                              height="32"
+                              style="margin-right: 10px"
+                            />BP Network</a
+                          >
+                        </div>
+                      </div>
+                      <div class="col-md-7">
+                        <div
+                          class="tab-content text-muted mt-4 mt-md-0"
+                          id="v-pills-tabContent"
+                        >
+                          <div
+                            class="tab-pane fade show active"
+                            id="v-pills-home"
+                            role="tabpanel"
+                            aria-labelledby="v-pills-home-tab"
+                          >
+                          Decision Tree is a decision analysis method which is based on the known probability of occurrence of various situations and constructs the decision tree to obtain the probability that the expected value of net present value is greater than or equal to zero, evaluate the project risk, and judge its feasibility. It is a graphical method of intuitive use of probability analysis. A decision tree is a tree-like structure in which each internal node represents a test on an attribute, each branch represents a test output, and each leaf node represents a category. Classification tree (decision tree) is a very common classification method. It is a kind of supervised learning, the so-called supervised learning is given a bunch of samples, each sample has a set of attributes and a category, these categories are determined in advance, then through learning to get a classifier, this classifier can give the correct classification of the newly emerged objects. This kind of machine learning is called supervised learning
+
+ 
+                          </div>
+                          <div
+                            class="tab-pane fade"
+                            id="v-pills-profile"
+                            role="tabpanel"
+                            aria-labelledby="v-pills-profile-tab"
+                          >
+                          The basic BP algorithm includes two processes of signal forward propagation and error back propagation. That is, the error output is calculated in the direction from input to output, while the weight and threshold are adjusted in the direction from output to input. In forward propagation, the input signal acts on the output node through the hidden layer and generates the output signal after nonlinear transformation. If the actual output is inconsistent with the expected output, the error will be transferred to the back propagation process. Error backpropagation is the backpropagation of the output error layer by layer from the hidden layer to the input layer, and the error is allocated to all the elements of each layer, and the error signal obtained from each layer is used as the basis for adjusting the weight of each element. By adjusting the connection strength between the input node and the hidden layer node and the connection strength between the hidden layer node and the output node as well as the threshold, the error decreases along the gradient direction. After repeated learning and training, the network parameters corresponding to the minimum error (weight and threshold) are determined, and the training stops. In this case, the trained neural network can process the non-linear transformed information with minimal output error for the input information of similar samples.
+
+ 
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- end row -->
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="card">
+                    <div class="card-body">
+                      <h4 class="header-title">Model Evaluation</h4>
+                      <div
+                        style="margin-top: 30px; display: flex;justify-content: center;"
+                      ><img src="assets\images\AdataImg\tree12.png" class="img-fluid" style="border: solid; border-color: gray; border-radius: 10px;"></div>
+                      <h4 class="header-title">Model Evaluation</h4>
+                      <div
+                      style="
+                        display: flex;
+                        margin-top: 20px;
+                        flex-wrap: wrap;
+                        justify-content: space-around;
+                      "
+                      >
+                        <div id="donut" style="width: 400px; height: 400px"></div>
+                        <div id="d2" style="width: 400px; height: 400px"></div>
+                      </div>
+                      <h4 class="header-title">Model Interpretation</h4>
+
+                      <div class="row" style="margin-top: 30px; border: solid; border-color: gray; padding: 10px; border-radius: 10px;">
+                        <div class="col-xl-5">
+                            <div>
+                                <div class="row">
+                                    <div>
+                                        <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                                        <div
+                                          style="
+                                            width: 100%;
+                                            margin: 5px;
+                                          "
+                                        ><img src="assets\images\AdataImg\111.png" class="img-fluid"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end product img -->
+                            <!-- end product img -->
+                        </div>
+                        <div class="col-xl-7">
+                            <div class="mt-4 mt-xl-4">
+                                <h5 class="mt-1 mb-3">Single Sample 1</h5>
+                                <div class="mt-1">
+                                  <div class="mt-4">
+                                    <p class="text-muted mb-2">The waterfall diagram represents the contribution of all features in the first sample to this sample, with positive contributions in red and negative contributions in blue.
+
+                                      The ordinate is the feature name, the abscissa is the contribution value, E[f(x)] represents the average predicted value, and f(x) represents the predicted value of the sample
+                                      
+                                      The higher the predicted value, the more likely it is to default.</p>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="row" style="margin-top: 30px; border: solid; border-color: gray; padding: 10px; border-radius: 10px;">
+                        <div>
+                            <div>
+                                <div class="row">
+                                    <div>
+                                        <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                                        <div
+                                          style="
+                                            width: 90%;
+                                            margin: 5px;
+                                          "
+                                        ><img src="assets\images\AdataImg\222.png" class="img-fluid"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end product img -->
+                            <!-- end product img -->
+                        </div>
+                        <div class="col-xl-10">
+                            <div class="mt-4 mt-xl-3">
+                                <h5 class="mt-1 mb-3">Single Sample 2</h5>
+                                <div class="mt-1">
+                                  <div class="mt-4">
+                                    <p class="text-muted mb-2">Visual positive and negative</p>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="row" style="margin-top: 30px; border: solid; border-color: gray; padding: 10px; border-radius: 10px;">
+                        <div class="col-xl-3">
+                            <div>
+                                <div class="row">
+                                    <div>
+                                        <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                                        <div
+                                          style="
+                                            width: 100%;
+                                            margin: 5px;
+                                          "
+                                        ><img src="assets\images\AdataImg\333.png" class="img-fluid"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end product img -->
+                            <!-- end product img -->
+                        </div>
+                        <div class="col-xl-7">
+                            <div class="mt-4 mt-xl-4">
+                                <h5 class="mt-1 mb-3">Overall 1: The influence of global features on the predicted value of the model</h5>
+                                <div class="mt-1">
+                                  <div class="mt-4">
+                                    <p class="text-muted mb-2">Rank the importance of features. The abscissa represents the influence on the predicted value of the model, the ordinate represents the name of the feature, the red represents the larger feature value, and the blue represents the smaller feature value
+
+                                      For example, it can be seen from the figure above that the larger the v940 feature, the greater the positive contribution to the model output and the greater the default probability.</p>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="row" style="margin-top: 30px; border: solid; border-color: gray; padding: 10px; border-radius: 10px;">
+                        <div class="col-xl-5">
+                            <div class="mt-4 mt-xl-4">
+                                <h5 class="mt-1 mb-3">Overall 2</h5>
+                                <div class="mt-1">
+                                  <div class="mt-4">
+                                    <p class="text-muted mb-2">The importance of each feature to the predicted value.</p>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-5">
+                          <div>
+                              <div class="row">
+                                  <div>
+                                      <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                                      <div
+                                        style="
+                                          width: 100%;
+                                          margin: 5px;
+                                        "
+                                      ><img src="assets\images\AdataImg\444.png" class="img-fluid"></div>
+                                  </div>
+                              </div>
+                          </div>
+                          <!-- end product img -->
+                          <!-- end product img -->
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- end row -->
+            </div>
+          </div>
+          <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+        <footer class="footer">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-6">
+                <script>
+                  document.write(new Date().getFullYear());
+                </script>
+                © Giraffe.
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+      <!-- end main content-->
+    </div>
+    <!-- END layout-wrapper -->
+
+    <!-- Right Sidebar -->
+    <div class="right-bar">
+      <div data-simplebar class="h-100">
+        <div class="rightbar-title d-flex align-items-center px-3 py-4">
+          <h5 class="m-0 me-2">Settings</h5>
+
+          <a href="javascript:void(0);" class="right-bar-toggle ms-auto">
+            <i class="mdi mdi-close noti-icon"></i>
+          </a>
+        </div>
+
+        <!-- Settings -->
+        <hr class="mt-0" />
+
+        <div class="p-4">
+          <div class="form-check form-switch mb-3">
+            <input
+              class="form-check-input theme-choice"
+              type="checkbox"
+              id="light-mode-switch"
+              checked
+            />
+            <label class="form-check-label" for="light-mode-switch"
+              >Light Mode</label
+            >
+          </div>
+
+          <div class="form-check form-switch mb-3">
+            <input
+              class="form-check-input theme-choice"
+              type="checkbox"
+              id="dark-mode-switch"
+              data-bsStyle="assets/css/bootstrap-dark.min.css"
+              data-appStyle="assets/css/app-dark.min.css"
+            />
+            <label class="form-check-label" for="dark-mode-switch"
+              >Dark Mode</label
+            >
+          </div>
+        </div>
+      </div>
+      <!-- end slimscroll-menu-->
+    </div>
+    <!-- /Right-bar -->
+    <!-- Right bar overlay-->
+    <div class="rightbar-overlay"></div>
+
+    <script type="text/javascript">
+      // 基于准备好的dom，初始化echarts实例
+      var DonutChart = echarts.init(document.getElementById("donut"));
+
+      // 指定图表的配置项和数据
+      option = {
+        title: {
+          left: "center",
+          text: "Loss",
+        },
+        legend: {
+          data: ['test', 'train'],
+          left:10
+        },
+        tooltip: {
+          trigger: 'axis'
+        },
+        xAxis: {
+          type: "category",
+          data: ["100", "200", "300", "400", "500", "600", "700"],
+        },
+        yAxis: {
+          type: "value",
+        },
+        series: [
+          {
+            name: "test",
+            data: [920, 822, 671, 434, 290, 130, 20],
+            type: "line",
+            smooth: true,
+          },
+          {
+            name: "train",
+            data: [820, 702, 501, 334, 200, 130, 100],
+            type: "line",
+            smooth: true,
+          },
+        ],
+      };
+
+      // 使用刚指定的配置项和数据显示图表。
+      DonutChart.setOption(option);
+
+      var DonutChart = echarts.init(document.getElementById("d2"));
+
+      // 指定图表的配置项和数据
+      option = {
+        title: {
+          left: "center",
+          text: "Accuracy",
+        },
+        tooltip: {
+          trigger: 'axis'
+        },
+        legend: {
+          data: ['test', 'train'],
+          left:10
+        },
+        xAxis: {
+          type: "category",
+          data: ["100", "200", "300", "400", "500", "600", "700"],
+        },
+        yAxis: {
+          type: "value",
+        },
+        series: [
+          {
+            name: "test",
+            data: [0.03, 0.08, 0.12, 0.35, 0.55, 0.61, 0.69],
+            type: "line",
+            smooth: true,
+          },
+          {
+            name: "train",
+            data: [0.01, 0.03, 0.06, 0.21, 0.33, 0.37, 0.42],
+            type: "line",
+            smooth: true,
+          },
+        ],
+      };
+
+      // 使用刚指定的配置项和数据显示图表。
+      DonutChart.setOption(option);
+    </script>
+
+    <script>
+      // hover事件 window.onload只能写一个
+      window.onload = function () {
+        choose_all_not(); //复制这个
+        choose_single_te();
+      };
+      // 全选
+      var choose_all_not = function () {
+        let tab_list = document.querySelector("#choose-all-not");
+        let lis = tab_list.querySelectorAll(".item");
+        let pros = document.querySelectorAll(".pro-box .item");
+
+        for (let i = 0; i < lis.length; i++) {
+          lis[i].setAttribute("index", i);
+          lis[i].onclick = function () {
+            for (let j = 0; j < lis.length; j++) {
+              let icon = lis[j].querySelector(".out");
+              icon.className = "out";
+            }
+
+            let this_icon = this.querySelector(".out");
+            this_icon.className = "out actic";
+            let index = this.getAttribute("index");
+
+            if (index == 0) {
+              let tab_list = document.querySelector("#choose-te-items");
+              let lis = tab_list.querySelectorAll(".item");
+              for (let j = 0; j < lis.length; j++) {
+                let icon = lis[j].querySelector(".out");
+                icon.className = "out actic";
+                pros[j].className = "item pro-act";
+              }
+            } else {
+              let tab_list = document.querySelector("#choose-te-items");
+              let lis = tab_list.querySelectorAll(".item");
+              for (let j = 0; j < lis.length; j++) {
+                let icon = lis[j].querySelector(".out");
+                icon.className = "out";
+                pros[j].className = "item";
+              }
+            }
+          };
+        }
+      };
+
+      // 选择某项
+      var choose_single_te = function () {
+        var tab_list = document.querySelector("#choose-te-items");
+        var lis = tab_list.querySelectorAll(".item");
+        for (let i = 0; i < lis.length; i++) {
+          lis[i].setAttribute("index", i);
+          lis[i].onclick = function () {
+            let index = this.getAttribute("index");
+            //    上面的选择框
+            let pros = document.querySelectorAll(".pro-box .item");
+
+            let this_icon = this.querySelector(".out");
+            if (this_icon.className == "out actic") {
+              this_icon.className = "out";
+              pros[index].className = "item";
+            } else {
+              this_icon.className = "out actic";
+              pros[index].className = "item pro-act";
+            }
+
+            let is_choose_all = true;
+            let is_choose_all_not = false;
+
+            for (let j = 0; j < lis.length; j++) {
+              let icon = lis[j].querySelector(".out");
+              if (icon.className == "out") {
+                is_choose_all = false;
+              } else {
+                is_choose_all_not = true;
+              }
+            }
+
+            if (is_choose_all) {
+              let tab_list = document.querySelector("#choose-all-not");
+              let lis = tab_list.querySelectorAll(".item");
+              let icon = lis[0].querySelector(".out");
+              icon.className = "out actic";
+            } else {
+              let tab_list = document.querySelector("#choose-all-not");
+              let lis = tab_list.querySelectorAll(".item");
+              let icon = lis[0].querySelector(".out");
+              icon.className = "out";
+              lis[1].querySelector(".out").className = "out";
+            }
+          };
+        }
+      };
+    </script>
+
+    <script type="text/javascript">
+      var Options = {
+        events: {
+          mouseWheel: true, // enables mouse wheel zooming events
+          doubleClick: false, // enables double-click to zoom-in events
+          drag: true, // enables drag and drop to move the SVG events
+          dragCursor: "move", // cursor to use while dragging the SVG
+        },
+        animationTime: 300, //300, // time in milliseconds to use as default for animations. Set 0 to remove the animation
+        zoomFactor: 0.25, // how much to zoom-in or zoom-out
+        maxZoom: 12, //maximum zoom in, must be a number bigger than 1
+        panFactor: 100, // how much to move the viewBox when calling .panDirection() methods
+      };
+
+      var svgfile = "assets/images/AdataImg/dtreeviz.svg";
+
+      $("#container").load(svgfile, function () {
+        //console.log("svg图形加载完毕");
+        $("svg").css("width", "100%");
+        $("svg").css("height", "100%");
+        svgPanZoom = $("svg").svgPanZoom(Options);
+      });
+
+      // 基于准备好的dom，初始化echarts实例
+      var myChart = echarts.init(document.getElementById("main"));
+
+      // 指定图表的配置项和数据
+      var option = {
+        xAxis: {
+          data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"],
+        },
+        yAxis: {},
+        series: [
+          {
+            name: "销量",
+            type: "bar",
+            data: [5, 20, 36, 10, 10, 20],
+          },
+        ],
+      };
+
+      // 使用刚指定的配置项和数据显示图表。
+      myChart.setOption(option);
+
+      var heatmap = echarts.init(document.getElementById("heatmap"));
+
+      // 指定图表的配置项和数据
+      const hours = [
+        "12a",
+        "1a",
+        "2a",
+        "3a",
+        "4a",
+        "5a",
+        "6a",
+        "7a",
+        "8a",
+        "9a",
+        "10a",
+        "11a",
+        "12p",
+        "1p",
+        "2p",
+        "3p",
+        "4p",
+        "5p",
+        "6p",
+        "7p",
+        "8p",
+        "9p",
+        "10p",
+        "11p",
+      ];
+      // prettier-ignore
+      const days = [
+                'Saturday', 'Friday', 'Thursday',
+                'Wednesday', 'Tuesday', 'Monday', 'Sunday'
+            ];
+      // prettier-ignore
+      const data = [[0, 0, 5], [0, 1, 1], [0, 2, 0], [0, 3, 0], [0, 4, 0], [0, 5, 0], [0, 6, 0], [0, 7, 0], [0, 8, 0], [0, 9, 0], [0, 10, 0], [0, 11, 2], [0, 12, 4], [0, 13, 1], [0, 14, 1], [0, 15, 3], [0, 16, 4], [0, 17, 6], [0, 18, 4], [0, 19, 4], [0, 20, 3], [0, 21, 3], [0, 22, 2], [0, 23, 5], [1, 0, 7], [1, 1, 0], [1, 2, 0], [1, 3, 0], [1, 4, 0], [1, 5, 0], [1, 6, 0], [1, 7, 0], [1, 8, 0], [1, 9, 0], [1, 10, 5], [1, 11, 2], [1, 12, 2], [1, 13, 6], [1, 14, 9], [1, 15, 11], [1, 16, 6], [1, 17, 7], [1, 18, 8], [1, 19, 12], [1, 20, 5], [1, 21, 5], [1, 22, 7], [1, 23, 2], [2, 0, 1], [2, 1, 1], [2, 2, 0], [2, 3, 0], [2, 4, 0], [2, 5, 0], [2, 6, 0], [2, 7, 0], [2, 8, 0], [2, 9, 0], [2, 10, 3], [2, 11, 2], [2, 12, 1], [2, 13, 9], [2, 14, 8], [2, 15, 10], [2, 16, 6], [2, 17, 5], [2, 18, 5], [2, 19, 5], [2, 20, 7], [2, 21, 4], [2, 22, 2], [2, 23, 4], [3, 0, 7], [3, 1, 3], [3, 2, 0], [3, 3, 0], [3, 4, 0], [3, 5, 0], [3, 6, 0], [3, 7, 0], [3, 8, 1], [3, 9, 0], [3, 10, 5], [3, 11, 4], [3, 12, 7], [3, 13, 14], [3, 14, 13], [3, 15, 12], [3, 16, 9], [3, 17, 5], [3, 18, 5], [3, 19, 10], [3, 20, 6], [3, 21, 4], [3, 22, 4], [3, 23, 1], [4, 0, 1], [4, 1, 3], [4, 2, 0], [4, 3, 0], [4, 4, 0], [4, 5, 1], [4, 6, 0], [4, 7, 0], [4, 8, 0], [4, 9, 2], [4, 10, 4], [4, 11, 4], [4, 12, 2], [4, 13, 4], [4, 14, 4], [4, 15, 14], [4, 16, 12], [4, 17, 1], [4, 18, 8], [4, 19, 5], [4, 20, 3], [4, 21, 7], [4, 22, 3], [4, 23, 0], [5, 0, 2], [5, 1, 1], [5, 2, 0], [5, 3, 3], [5, 4, 0], [5, 5, 0], [5, 6, 0], [5, 7, 0], [5, 8, 2], [5, 9, 0], [5, 10, 4], [5, 11, 1], [5, 12, 5], [5, 13, 10], [5, 14, 5], [5, 15, 7], [5, 16, 11], [5, 17, 6], [5, 18, 0], [5, 19, 5], [5, 20, 3], [5, 21, 4], [5, 22, 2], [5, 23, 0], [6, 0, 1], [6, 1, 0], [6, 2, 0], [6, 3, 0], [6, 4, 0], [6, 5, 0], [6, 6, 0], [6, 7, 0], [6, 8, 0], [6, 9, 0], [6, 10, 1], [6, 11, 0], [6, 12, 2], [6, 13, 1], [6, 14, 3], [6, 15, 4], [6, 16, 0], [6, 17, 0], [6, 18, 0], [6, 19, 0], [6, 20, 1], [6, 21, 2], [6, 22, 2], [6, 23, 6]]
+                .map(function (item) {
+                return [item[1], item[0], item[2] || '-'];
+            });
+      option = {
+        tooltip: {
+          position: "top",
+        },
+        grid: {
+          height: "50%",
+          top: "10%",
+        },
+        xAxis: {
+          type: "category",
+          data: hours,
+          splitArea: {
+            show: true,
+          },
+        },
+        yAxis: {
+          type: "category",
+          data: days,
+          splitArea: {
+            show: true,
+          },
+        },
+        visualMap: {
+          min: 0,
+          max: 10,
+          calculable: true,
+          orient: "horizontal",
+          left: "center",
+          bottom: "90%",
+        },
+        series: [
+          {
+            name: "Punch Card",
+            type: "heatmap",
+            data: data,
+            label: {
+              show: true,
+            },
+            emphasis: {
+              itemStyle: {
+                shadowBlur: 10,
+                shadowColor: "rgba(0, 0, 0, 0.5)",
+              },
+            },
+          },
+        ],
+      };
+
+      // 使用刚指定的配置项和数据显示图表。
+      heatmap.setOption(option);
+    </script>
+
+    <!-- JAVASCRIPT -->
+    <script src="assets/libs/jquery/jquery.min.js"></script>
+    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/libs/metismenu/metisMenu.min.js"></script>
+    <script src="assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="assets/libs/node-waves/waves.min.js"></script>
+
+    <!-- Table Editable plugin -->
+    <script src="assets/libs/table-edits/build/table-edits.min.js"></script>
+
+    <script src="assets/js/pages/table-editable.init.js"></script>
+
+    <!-- Chart JS -->
+    <script src="assets/libs/chart.js/Chart.bundle.min.js"></script>
+    <script src="assets/js/pages/chartjs.init.js"></script>
+
+    <!-- apexcharts -->
+    <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
+
+    <!-- Required datatable js -->
+    <script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <!-- Buttons examples -->
+    <script src="assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+    <script src="assets/libs/jszip/jszip.min.js"></script>
+    <script src="assets/libs/pdfmake/build/pdfmake.min.js"></script>
+    <script src="assets/libs/pdfmake/build/vfs_fonts.js"></script>
+    <script src="assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+    <!-- Responsive examples -->
+    <script src="assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+
+    <!-- Datatable init js -->
+    <script src="assets/js/pages/datatables.init.js"></script>
+
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>

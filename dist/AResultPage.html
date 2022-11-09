@@ -1,0 +1,688 @@
+﻿<!doctype html>
+<html lang="en">
+
+    <head>
+        
+        
+        <meta charset="utf-8" />
+        <title>Application | Giraffe - User Application Result</title>
+
+        <!-- 引入 echarts.js -->
+	    <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Themesdesign" name="author" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="assets/images/favicon.ico">
+        <!-- plugin css -->
+        <link href="assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+
+        <!-- Bootstrap Css -->
+        <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+
+
+        <!-- DataTables -->
+        <link href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/libs/datatables.net-autoFill-bs4/css/autoFill.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/libs/datatables.net-keytable-bs4/css/keyTable.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+        <!-- Responsive datatable examples -->
+        <link href="assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />   
+
+    </head>
+
+    
+    <body>
+
+        <!-- Begin page -->
+        <div id="layout-wrapper">
+
+            <header id="page-topbar">
+                <div class="navbar-header">
+                    <div class="d-flex">
+
+                           <!-- LOGO -->
+                     <div class="navbar-brand-box">
+                        <a href="AuserAppli.html" class="logo logo-dark">
+                            <span class="logo-sm">
+                                <img src="assets/images/logo-sm.png" alt="" height="52">
+                            </span>
+                            <span class="logo-lg">
+                                <img src="assets/images/logo-dark.png" alt="" height="50">
+                            </span>
+                        </a>
+
+                        <a href="AuserAppli.html" class="logo logo-light">
+                            <span class="logo-sm">
+                                <img src="assets/images/logo-sm.png" alt="" height="52">
+                            </span>
+                            <span class="logo-lg">
+                                <img src="assets/images/logo-light.png" alt="" height="50">
+                            </span>
+                        </a>
+                    </div>
+
+                        <button type="button" class="btn btn-sm px-3 font-size-24 header-item waves-effect" id="vertical-menu-btn">
+                            <i class="mdi mdi-menu"></i>
+                        </button>
+
+
+                        <div class="topbar-social-icon me-3 d-none d-md-block">
+                            <ul class="list-inline title-tooltip m-0">
+                                <li class="list-inline-item">
+                                    <a href="email-inbox.html" data-bs-toggle="tooltip" data-placement="top" title="Email">
+                                     <i class="mdi mdi-email-outline"></i>
+                                    </a>
+                                </li>
+                        
+                                <li class="list-inline-item">
+                                    <a href="chat.html" data-bs-toggle="tooltip" data-placement="top" title="Chat">
+                                     <i class="mdi mdi-tooltip-outline"></i>
+                                    </a>
+                                </li>
+
+                                <li class="list-inline-item">
+                                    <a href="calendar.html" data-bs-toggle="tooltip" data-placement="top" title="Calendar">
+                                     <i class="mdi mdi-calendar"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+            
+                    </div>
+
+                     <!-- Search input -->
+                     <div class="search-wrap" id="search-wrap">
+                        <div class="search-bar">
+                            <input class="search-input form-control" placeholder="Search" />
+                            <a href="#" class="close-search toggle-search" data-target="#search-wrap">
+                                <i class="mdi mdi-close-circle"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="d-flex">
+                        <div class="dropdown d-none d-lg-inline-block">
+                            <button type="button" class="btn header-item toggle-search noti-icon waves-effect" data-target="#search-wrap">
+                                <i class="mdi mdi-magnify"></i>
+                            </button>
+                        </div>
+
+                        <div class="dropdown d-none d-md-block ms-2">
+                            <button type="button" class="btn header-item waves-effect" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img class="me-2" src="assets/images/flags/us.jpg" alt="Header Language" height="16"> English <span class="mdi mdi-chevron-down"></span>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end">
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <img src="assets/images/flags/germany.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle"> German </span>
+                                </a>
+                            </div>
+                        </div>
+
+    
+           
+
+           
+
+                        <div class="dropdown d-none d-lg-inline-block ms-1">
+                            <button type="button" class="btn header-item noti-icon waves-effect" data-toggle="fullscreen">
+                                <i class="mdi mdi-fullscreen"></i>
+                            </button>
+                        </div>
+
+                
+
+                        <div class="dropdown d-inline-block">
+                            <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-7.jpg"
+                                    alt="Header Avatar">
+                                <span class="d-none d-xl-inline-block ms-1">THU</span>
+                                <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item text-danger" href="#"><i class="mdi mdi-power font-size-16 align-middle me-1 text-danger"></i> Logout</a>
+                            </div>
+                        </div>
+
+                        <div class="dropdown d-inline-block">
+                            <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
+                                <i class="mdi mdi-cog-outline font-size-20"></i>
+                            </button>
+                        </div>
+            
+                    </div>
+                </div>
+            </header>
+
+            <!-- ========== Left Sidebar Start ========== -->
+            <div class="vertical-menu">
+
+                <div data-simplebar class="h-100">
+
+
+                    <div class="user-sidebar text-center">
+                        <div class="dropdown">
+                            <div class="user-img">
+                                <img src="assets/images/users/avatar-7.jpg" alt="" class="rounded-circle">
+                                <span class="avatar-online bg-success"></span>
+                            </div>
+                            <div class="user-info">
+                                <h5 class="mt-3 font-size-16 text-white">THU Giraffe</h5>
+                                <span class="font-size-13 text-white-50">Administrator</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!--- Sidemenu -->
+                    <div id="sidebar-menu">
+                        <!-- Left Menu Start -->
+                        <ul class="metismenu list-unstyled" id="side-menu">
+                            <li class="menu-title">Operation</li>
+                            <li>
+                                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                    <i class="dripicons-user"></i>
+                                    <span>Application</span>
+                                </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                    <li><a href="AuserAppli.html">User Apply</a></li>
+                                    <li><a href="AreviewAppli.html">Review</a></li>
+                                    <li><a href="AResultPage.html">Result</a></li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                    <i class="dripicons-pulse"></i>
+                                    <span>Training</span>
+                                </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                    <li><a href="AData.html">Data Processing</a></li>
+                                    <li><a href="ATraining.html">Model Training</a></li>
+                                    <li><a href="Ahistory.html">Model Training</a></li>
+                                </ul>
+                            </li>
+                            <li class="menu-title">Other</li>
+                            <li>
+                                <a href="calendar.html" class=" waves-effect">
+                                    <i class="dripicons-calendar"></i>
+                                    <span>Calendar</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="chat.html" class=" waves-effect">
+                                    <i class="dripicons-message"></i>
+                                    <span>Chat</span>
+                                </a>
+                            </li>
+
+                           
+                            <li>
+                                <a href="email-inbox.html" class=" waves-effect">
+                                    <i class="dripicons-mail"></i>
+                                    <span>Email</span>
+                                </a>
+                            </li>
+                            
+
+                            
+                            
+                        </ul>
+                    </div>
+                    <!-- Sidebar -->
+                </div>
+            </div>
+            <!-- Left Sidebar End -->
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+                <div class="page-content">
+
+                    <!-- start page title -->
+                    <div class="page-title-box">
+                        <div class="container-fluid">
+                         <div class="row align-items-center">
+                             <div class="col-sm-6">
+                                 <div class="page-title">
+                                     <h4>User application result</h4>
+                                         <ol class="breadcrumb m-0">
+                                             <li class="breadcrumb-item"><a href="javascript: void(0);">Giraffe</a></li>
+                                             <li class="breadcrumb-item"><a href="javascript: void(0);">Application</a></li>
+                                             <li class="breadcrumb-item active">User application result</li>
+                                         </ol>
+                                 </div>
+                             </div>
+                         </div>
+                        </div>
+                     </div>
+                     <!-- end page title -->    
+
+
+                    <div class="container-fluid">
+
+                        <div class="page-content-wrapper">
+
+                            <div class="row">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="text-center">
+                                            <div class="mini-stat-icon mx-auto mb-4 mt-3">
+                                                <span class="avatar-title rounded-circle bg-soft-success">
+                                                    <i class="fas fa-check text-success font-size-20"></i>
+                                                </span>
+                                            </div>
+                                            <h4>Approve</h4>
+                                            <p class="card-title-desc">The money is expected to arrive within 20 working days at the soonest.</p>
+                                            
+                                        </div>
+                                        <div style="display:flex; justify-content: center;">
+                                            <div>
+                                                <dt class="col-sm-3 text-truncate">Account</dt>
+                                                <dd class="col-sm-9">Safe@email.com</dd>
+            
+                                                <dt class="col-sm-9 text-truncate">Bene's A/C No</dt>
+                                                <dd class="col-sm-12">XXXX XXXX XXXX XXXX Bank of ABC</dd>
+            
+                                                <dt class="col-sm-9 text-truncate">Applicant Name</dt>
+                                                <dd class="col-sm-9">Joy Water</dd>
+            
+                                                <dt class="col-sm-9 text-truncate">Contract Amount Loans</dt>
+                                                <dd class="col-sm-9">50,000.00</dd>
+                                            </div>
+                                        </div>
+                                        <div class="row text-center mb-3">
+                                            <div class="button-items">
+                                                <button type="button" class="btn btn-primary waves-effect waves-light">Details</button>
+                                                <button type="button" class="btn btn-outline-primary waves-effect waves-light">Next</button>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <div class="row">
+                                                <div class="col-xl-5">
+                                                    <div>
+                                                        <div class="row">
+                                                            <div>
+                                                                <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                                                                <div id="radar" style="width: 400px;height:300px;margin-top: 50px;"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end product img -->
+                                                </div>
+                                                <div class="col-xl-7">
+                                                    <div class="mt-4 mt-xl-3">
+                                                        <h5 class="mt-1 mb-3">Applicant's credit score</h5>
+    
+                                                        <div class="d-inline-flex">
+                                                            <div class="text-muted me-3">
+                                                                <span class="mdi mdi-star text-warning"></span>
+                                                                <span class="mdi mdi-star text-warning"></span>
+                                                                <span class="mdi mdi-star text-warning"></span>
+                                                                <span class="mdi mdi-star-outline text-warning"></span>
+                                                                <span class="mdi mdi-star-outline text-warning"></span>
+                                                            </div>
+                                                        </div>                           
+
+                                                        <div class="mt-4">
+
+                                                          <div class="mt-3">
+                                                            <p class="text-muted mb-2"><i class="mdi mdi-check-bold text-success me-2"></i>Applicant's credit: Excellent</p>
+                                                            <p class="text-muted mb-2"><i class="mdi mdi-check-bold text-success me-2"></i>Credit score: 600/700</p>
+                                                            <p class="text-muted mb-2"><i class="mdi mdi-check-bold text-success me-2"></i>In the past one year, 
+                                                                the applicant has been in default for 0 times and overdue for 1 times without any bad record. The applicant is highly educated, 
+                                                                has a stable job and healthy interpersonal relationship, and belongs to the excellent customer group.</p>
+                                                          </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xl-5">
+                                                    <div>
+                                                        <div class="row">
+                                                            <div>
+                                                                <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                                                                <div id="donut" style="width: 400px;height:300px"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end product img -->
+                                                </div>
+                                                <div class="col-xl-7">
+                                                    <div class="mt-4 mt-xl-3">
+                                                        <h5 class="mt-1 mb-3">Applicant's recent credit behavior</h5>
+    
+                                                        <div class="d-inline-flex">
+                                                            <div class="text-muted me-3">
+                                                                <span class="mdi mdi-star text-warning"></span>
+                                                                <span class="mdi mdi-star text-warning"></span>
+                                                                <span class="mdi mdi-star text-warning"></span>
+                                                                <span class="mdi mdi-star text-warning"></span>
+                                                                <span class="mdi mdi-star-half text-warning"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mt-1">
+                                                          <div class="mt-4">
+                                                            <p class="text-muted mb-2"><i class="mdi mdi-check-bold text-success me-2"></i>Number of credit acts of the applicant: 152</p>
+                                                            <p class="text-muted mb-2"><i class="mdi mdi-check-bold text-success me-2"></i>Credit scenario</p>
+                                                            <span class="col-sm-7 text-info" >Public Transport (compliance: 65 and default: 0)<br></span>
+                                                            <span class="col-sm-7 text-info" >Credit on loan (compliance: 35 and default: 0)<br></span>
+                                                            <span class="col-sm-7 text-danger" >Credit for repayment (compliance: 5 and default: 2)<br></span>
+                                                            <p class="text-muted mb-2"><i class="mdi mdi-check-bold text-success me-2"></i>Credit performance in the last three months: Great</p>
+                                                          </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xl-5">
+                                                    <div>
+                                                        <div class="row">
+                                                            <div>
+                                                                <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                                                                <div id="bar" style="width: 400px;height:300px"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end product img -->
+                                                    <!-- end product img -->
+                                                </div>
+                                                <div class="col-xl-7">
+                                                    <div class="mt-4 mt-xl-3">
+                                                        <h5 class="mt-1 mb-3">The income and expenditure of the applicant</h5>
+    
+                                                        <div class="d-inline-flex">
+                                                            <div class="text-muted me-3">
+                                                                <span class="mdi mdi-star text-warning"></span>
+                                                                <span class="mdi mdi-star text-warning"></span>
+                                                                <span class="mdi mdi-star text-warning"></span>
+                                                                <span class="mdi mdi-star text-warning"></span>
+                                                                <span class="mdi mdi-star-half text-warning"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mt-1">
+                                                          <div class="mt-4">
+                                                            <p class="text-muted mb-2"><i class="mdi mdi-check-bold text-success me-2"></i>Recent (5 months) income and expenditure of the applicant: Normal</p>
+                                                            <p class="text-muted mb-2"><i class="mdi mdi-check-bold text-success me-2"></i>Total income: $32700 Total expenditure: $14,040</p>
+                                                            <p class="col-sm-9"></p>
+                                                            <p class="text-muted mb-2"><i class="mdi mdi-close-thick text-danger me-2"></i>In February, cumulative expenditure: 6489, income: 5400, 
+                                                                there may be risk of overspending (need attention)</p>
+                                                          </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-body">
+            
+                                            <h4 class="header-title">Family Member Information</h4>            
+                                            <div class="table-responsive">
+                                                <table class="table table-editable table-nowrap align-middle table-edits">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Name</th>
+                                                            <th>Contact</th>
+                                                            <th>Relationship</th>
+                                                            <th>Address</th>
+                                                            <th>Credit rating</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr data-id="1">
+                                                            <td data-field="name">Jo****wn</td>
+                                                            <td data-field="contact">152-****-6644</td>
+                                                            <td data-field="relationship">Father</td>
+                                                            <td data-field="address">New York **** Lake Park</td>
+                                                            <td style="width: 100px">
+                                                                <span class="badge badge-soft-info">Great</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr data-id="2">
+                                                            <td data-field="name">Jo****wn</td>
+                                                            <td data-field="contact">152-****-2233</td>
+                                                            <td data-field="relationship">Neighbor</td>
+                                                            <td data-field="address">New York **** Lake Park</td>
+                                                            <td style="width: 100px">
+                                                                <span class="badge badge-soft-info">Great</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr data-id="4">
+                                                            <td data-field="name">Jo****ack</td>
+                                                            <td data-field="contact">153-****-1204</td>
+                                                            <td data-field="relationship">Uncle</td>
+                                                            <td data-field="address">Sidney **** T Garden</td>
+                                                            <td style="width: 100px">
+                                                                <span class="badge badge-soft-success">Excellent</span>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> <!-- end col -->
+                            </div> <!-- end row -->
+
+        
+                    </div> <!-- container-fluid -->
+                </div>
+                <!-- End Page-content -->
+
+              
+                
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <script>document.write(new Date().getFullYear())</script> © Giraffe.
+                            </div>
+                            
+                        </div>
+                    </div>
+                </footer>
+            </div>
+            <!-- end main content-->
+
+        </div>
+        <!-- END layout-wrapper -->
+
+        <!-- Right Sidebar -->
+        <div class="right-bar">
+            <div data-simplebar class="h-100">
+                <div class="rightbar-title d-flex align-items-center px-3 py-4">
+            
+                    <h5 class="m-0 me-2">Settings</h5>
+
+                    <a href="javascript:void(0);" class="right-bar-toggle ms-auto">
+                        <i class="mdi mdi-close noti-icon"></i>
+                    </a>
+                </div>
+
+                <!-- Settings -->
+                <hr class="mt-0" />
+
+                <div class="p-4">
+
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input theme-choice" type="checkbox" id="light-mode-switch" checked>
+                        <label class="form-check-label" for="light-mode-switch">Light Mode</label>
+                    </div>
+    
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input theme-choice" type="checkbox" id="dark-mode-switch" data-bsStyle="assets/css/bootstrap-dark.min.css" data-appStyle="assets/css/app-dark.min.css">
+                        <label class="form-check-label" for="dark-mode-switch">Dark Mode</label>
+                    </div>
+            
+                </div>
+
+            </div> <!-- end slimscroll-menu-->
+        </div>
+        <!-- /Right-bar -->
+
+        <!-- Right bar overlay-->
+        <div class="rightbar-overlay"></div>
+
+        <script type="text/javascript">
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('radar'));
+    
+            // 指定图表的配置项和数据
+            var option = {
+                radar: {
+                    // shape: 'circle',
+                    indicator: [
+                    { name: 'Observant Record', max: 200 },
+                    { name: 'Relationship', max: 100 },
+                    { name: 'Property', max: 100 },
+                    { name: 'Identity', max: 100 },
+                    { name: 'Behaviour', max: 200 },
+                    ]
+                },
+                series: [
+                    {
+                    name: 'Budget vs spending',
+                    type: 'radar',
+                    data: [
+                        {
+                        value: [180, 80, 70, 100, 170],
+                        name: 'Allocated Budget'
+                        },
+                    ]
+                    }
+                ],
+                tooltip: {
+                    trigger: 'item'
+                },
+            };
+    
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+
+            var DonutChart = echarts.init(document.getElementById('donut'));
+    
+            // 指定图表的配置项和数据
+            option = {
+                tooltip: {
+                    trigger: 'item'
+                },
+                series: [
+                {
+                    name: 'Access From',
+                    type: 'pie',
+                    radius: ['40%', '70%'],
+                    itemStyle: {
+                        borderRadius: 10,
+                        borderColor: '#fff',
+                        borderWidth: 2
+                    },
+                    data: [
+                        { value: 2, name: '违约' },
+                        { value: 150, name: '守约' }
+                    ],
+                    emphasis: {
+                        label: {
+                        show: true,
+                        fontSize: '15',
+                        fontWeight: 'bold'
+                        }
+                    },
+                    label: {
+                        show: false,
+                        position: 'center'
+                    },
+                }
+                ]
+            };
+    
+            // 使用刚指定的配置项和数据显示图表。
+            DonutChart.setOption(option);
+
+            var BarChart = echarts.init(document.getElementById('bar'));
+    
+            // 指定图表的配置项和数据
+            option = {
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                    type: 'shadow'
+                    }
+                },
+                
+                grid: {
+                    left: '3%',
+                    right: '13%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'value',
+                    boundaryGap: [0, 0.01]
+                },
+                yAxis: {
+                    type: 'category',
+                    data: ['Jan', 'Feb', 'Mar', 'Apr', 'May']
+                },
+                series: [
+                    {
+                    name: 'expend',
+                    type: 'bar',
+                    data: [803, 6489, 2034, 2970, 1744]
+                    },
+                    {
+                    name: 'income',
+                    type: 'bar',
+                    data: [7700, 5400, 6000, 7600, 6000]
+                    }
+                ]
+            };
+    
+            // 使用刚指定的配置项和数据显示图表。
+            BarChart.setOption(option);
+
+            
+        </script>
+
+        <!-- JAVASCRIPT -->
+        <script src="assets/libs/jquery/jquery.min.js"></script>
+        <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/libs/metismenu/metisMenu.min.js"></script>
+        <script src="assets/libs/simplebar/simplebar.min.js"></script>
+        <script src="assets/libs/node-waves/waves.min.js"></script>
+
+        
+        <!-- Table Editable plugin -->
+        <script src="assets/libs/table-edits/build/table-edits.min.js"></script>
+
+        <script src="assets/js/pages/table-editable.init.js"></script> 
+
+        <!-- Chart JS -->
+        <script src="assets/libs/chart.js/Chart.bundle.min.js"></script>
+        <script src="assets/js/pages/chartjs.init.js"></script> 
+
+        <!-- apexcharts -->
+        <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
+
+        <script src="assets/js/app.js"></script>
+
+    </body>
+</html>
